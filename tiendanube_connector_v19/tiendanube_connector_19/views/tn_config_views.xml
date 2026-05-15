@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vista de lista de configuraciones -->
+    <record id="view_tn_config_list" model="ir.ui.view">
+        <field name="name">tn.config.list</field>
+        <field name="model">tn.config</field>
+        <field name="arch" type="xml">
+            <list string="Configuraciones TiendaNube">
+                <field name="name"/>
+                <field name="store_id"/>
+                <field name="tn_store_country_id" optional="show"/>
+                <field name="company_id"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vista de formulario de configuración -->
+    <record id="view_tn_config_form" model="ir.ui.view">
+        <field name="name">tn.config.form</field>
+        <field name="model">tn.config</field>
+        <field name="arch" type="xml">
+            <form string="Configuración TiendaNube">
+                <header>
+                    <button name="action_authorize" string="Autorizar Aplicación" type="object" class="oe_highlight" icon="fa-key" groups="tiendanube_connector.group_tn_manager"/>
+                    <button name="action_test_connection" string="Probar Conexión" type="object" class="btn-primary" icon="fa-plug" groups="tiendanube_connector.group_tn_manager"/>
+                    <button name="action_refresh_store_country_metadata" string="Actualizar país/moneda (API)" type="object" class="btn-secondary" icon="fa-globe" groups="tiendanube_connector.group_tn_manager"/>
+                    <button name="action_refresh_token" string="Refrescar Token" type="object" class="btn-secondary" icon="fa-refresh" groups="tiendanube_connector.group_tn_manager"/>
+                    <button name="action_import_publications" string="Importar Publicaciones" type="object" class="oe_highlight" icon="fa-download" groups="tiendanube_connector.group_tn_manager"/>
+                    <button name="action_create_webhook" string="Crear Webhook de Ventas" type="object" class="btn-primary" icon="fa-bell" groups="tiendanube_connector.group_tn_manager"/>
+                    <button name="action_auto_link_all_products_by_sku" string="Auto-relacionar Productos por SKU" type="object" class="btn-secondary" icon="fa-link" groups="tiendanube_connector.group_tn_manager"/>
+                    <button name="action_sync_all_stocks" string="Sincronizar Todos los Stocks" type="object" class="oe_highlight" icon="fa-cubes" groups="tiendanube_connector.group_tn_manager"/>
+                    <button name="action_sync_all_prices" string="Sincronizar Todos los Precios" type="object" class="btn-secondary" icon="fa-dollar" groups="tiendanube_connector.group_tn_manager"/>
+                    <button name="action_sync_orders_now" string="Importar ventas / reintento webhook" type="object" class="btn-primary" icon="fa-download" groups="tiendanube_connector.group_tn_manager"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group string="Información General">
+                            <field name="name" placeholder="Nombre de la cuenta"/>
+                            <field name="company_id" options="{'no_create': True}"/>
+                        </group>
+                        <group string="Credenciales de API">
+                            <field name="client_id" password="True" placeholder="Client ID" groups="tiendanube_connector.group_tn_manager"/>
+                            <field name="client_secret" password="True" placeholder="Client Secret" groups="tiendanube_connector.group_tn_admin"/>
+                            <field name="access_token" password="True" placeholder="Access Token" groups="tiendanube_connector.group_tn_admin"/>
+                            <field name="refresh_token" password="True" placeholder="Refresh Token" groups="tiendanube_connector.group_tn_admin"/>
+                        </group>
+                        <group string="Configuración de Tienda">
+                            <field name="store_id" placeholder="Store ID"/>
+                            <field name="api_base_url" placeholder="https://api.tiendanube.com/v1"/>
+                        </group>
+                        <group string="País de la tienda (TiendaNube)" colspan="2">
+                            <field name="tn_store_country_code" readonly="1"/>
+                            <field name="tn_store_country_id" readonly="1" options="{'no_open': True}"/>
+                            <field name="tn_store_main_currency" readonly="1"/>
+                            <field name="tn_store_metadata_synced_at" readonly="1"/>
+                            <div class="alert alert-info" role="alert" colspan="2">
+                                <p><strong>Detectado automáticamente.</strong> El país y la moneda se obtienen de la API TiendaNube (recurso <code>GET /store</code>) al guardar token y Store ID, al crear la cuenta, tras OAuth o con «Actualizar país/moneda (API)». No se puede editar a mano.</p>
+                                <p><strong>Uso en Odoo:</strong> al crear contactos desde pedidos TN se usa ese país para <code>res.partner.country_id</code> y para buscar la provincia/estado; el texto de país en la venta TN prioriza el envío del pedido y, si falta, el país de la tienda. Si la API aún no respondió, se usa Argentina como respaldo.</p>
+                                <p><strong>Diferencias por país en el conector:</strong> hoy no hay ramas distintas por país más allá de usar el ISO correcto y los estados de <code>res.country.state</code> del país correspondiente. Facturación, impuestos y listas de precios siguen siendo los que configure en esta pantalla.</p>
+                            </div>
+                        </group>
+                    </group>
+                    <group string="Configuración del stock">
+                        <group>
+                            <field name="stock_location_id" options="{'no_create': True}" placeholder="Seleccionar almacén..."/>
+                            <field name="stock_type"/>
+                            <field name="pricelist_id" options="{'no_create': True}" placeholder="Seleccionar lista de precios..."/>
+                        </group>
+                    </group>
+                    <group string="Configuración de Ventas">
+                        <group>
+                            <field name="sale_pricelist_id" options="{'no_create': True}" placeholder="Seleccionar lista de precios para ventas..."/>
+                            <field name="fallback_product_id" options="{'no_create': True}" placeholder="Seleccionar producto por defecto para errores SKU..."/>
+                            <field name="default_tax_id" options="{'no_create': True}" placeholder="Seleccionar impuesto por defecto..."/>
+                            <field name="warehouse_id" options="{'no_create': True}" placeholder="Seleccionar almacén predeterminado..."/>
+                        </group>
+                        <group>
+                            <field name="invoice_journal_id" options="{'no_create': True}" placeholder="Seleccionar diario para facturas..."/>
+                            <field name="default_income_account_id" options="{'no_create': True}" placeholder="Seleccionar cuenta de ingresos..."/>
+                            <field name="auto_invoice"/>
+                            <field name="consumidor_final_partner_id" options="{'no_create': True}" placeholder="Ej. Consumidor Final"/>
+                        </group>
+                    </group>
+                    <group string="Webhook de Ventas">
+                        <group>
+                            <field name="webhook_id" readonly="1"/>
+                            <field name="webhook_url" readonly="1"/>
+                            <field name="webhook_enabled"/>
+                            <div class="alert alert-info" role="alert">
+                                <p><strong>Webhook automático:</strong> El webhook se crea automáticamente al guardar la configuración con Access Token y Store ID válidos.</p>
+                                <p>Si necesitas recrearlo manualmente, usa el botón "Crear Webhook de Ventas" en el header.</p>
+                                <p><strong>Procesar Webhooks:</strong> Si está desactivado, los webhooks seguirán llegando pero no se procesarán. El webhook permanece activo en TiendaNube.</p>
+                                <p><strong>Importar ventas / reintento:</strong> Use el botón del encabezado «Importar ventas / reintento webhook» para traer ventas por <em>últimas N horas</em> o por rango de fechas y, si lo desea, reprocesar notificaciones pendientes o fallidas.</p>
+                            </div>
+                        </group>
+                    </group>
+                    <group string="Sincronización de Órdenes (Polling)">
+                        <group>
+                            <field name="polling_enabled"/>
+                            <field name="order_polling_hours_back" invisible="not polling_enabled"/>
+                            <field name="last_sync_date" readonly="1" invisible="not polling_enabled"/>
+                            <field name="polling_orders_per_page" invisible="1"/>
+                            <field name="polling_max_pages" invisible="1"/>
+                            <field name="api_timeout_seconds" readonly="1" invisible="not polling_enabled"/>
+                            <field name="api_max_retries" readonly="1" invisible="not polling_enabled"/>
+                            <field name="cron_orders_active" readonly="1" invisible="not polling_enabled"/>
+                            <field name="cron_orders_next_run" readonly="1" invisible="not polling_enabled"/>
+                            <field name="cron_orders_last_run" readonly="1" invisible="not polling_enabled"/>
+                            <div class="alert alert-info" role="alert" invisible="not polling_enabled">
+                                <p><strong>Sincronización por Polling:</strong> El cron ejecuta cada 10 minutos y revisa las ventas creadas en TiendaNube en las <strong>últimas N horas</strong> (configurable arriba). Límite: 1 a 168 horas (7 días).</p>
+                                <p><strong>Última Sincronización:</strong> Se actualiza después de cada ejecución exitosa.</p>
+                                <p><strong>Idempotencia:</strong> Las órdenes duplicadas se detectan y se actualizan en lugar de crearse de nuevo.</p>
+                            </div>
+                            <div class="alert alert-warning" role="alert" invisible="polling_enabled">
+                                <p><strong>Polling Desactivado:</strong> Solo se sincronizarán órdenes mediante webhooks. El cron no ejecutará la sincronización automática.</p>
+                            </div>
+                        </group>
+                    </group>
+                    <group string="Sincronización Automática desde Odoo">
+                        <group>
+                            <field name="auto_sync_stock_on_odoo_change"/>
+                            <div class="alert alert-info" role="alert">
+                                <p><strong>Sincronizar Stock Automáticamente desde Odoo:</strong> Si está activado, cuando se modifique el stock en Odoo (por ventas, compras, ajustes manuales, etc.), se sincronizará automáticamente el stock a TiendaNube.</p>
+                                <p><strong>Importante:</strong> El stock se copia directamente (valor absoluto) desde Odoo a TiendaNube. No se suma ni resta, se reemplaza el valor anterior con el valor actual de Odoo.</p>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="auto_sync_price_on_odoo_change"/>
+                            <div class="alert alert-info" role="alert">
+                                <p><strong>Sincronizar Precio Automáticamente desde Odoo:</strong> Si está activado, cuando se modifique el precio del producto en Odoo (list_price o en la lista de precios configurada), se sincronizará automáticamente el precio a TiendaNube.</p>
+                                <p><strong>Nota:</strong> La sincronización siempre es de Odoo hacia TiendaNube, nunca al revés.</p>
+                            </div>
+                        </group>
+                    </group>
+                    <group string="Control de Stock Mínimo">
+                        <group>
+                            <field name="enable_min_stock_pause"/>
+                            <field name="global_min_stock_pause" invisible="not enable_min_stock_pause"/>
+                            <div class="alert alert-info" role="alert" invisible="not enable_min_stock_pause">
+                                <p><strong>Pausa Automática por Stock:</strong> Cuando está activada, las publicaciones se pausarán automáticamente cuando el stock total caiga por debajo del umbral de pausa configurado.</p>
+                                <p><strong>Umbral Global:</strong> Este valor se aplica a todas las publicaciones que no tengan un umbral específico configurado. Las publicaciones pueden tener sus propios umbrales que sobrescriben este valor global.</p>
+                                <p><strong>Regla:</strong> Si stock &lt; umbral_pausa → Publicación se pausa (published=False)</p>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="enable_min_stock_unpause"/>
+                            <field name="global_min_stock_unpause" invisible="not enable_min_stock_unpause"/>
+                            <div class="alert alert-info" role="alert" invisible="not enable_min_stock_unpause">
+                                <p><strong>Despausa Automática por Stock:</strong> Cuando está activada, las publicaciones se despausarán automáticamente cuando el stock total supere el umbral de despausa configurado.</p>
+                                <p><strong>Umbral Global:</strong> Este valor se aplica a todas las publicaciones que no tengan un umbral específico configurado. Las publicaciones pueden tener sus propios umbrales que sobrescriben este valor global.</p>
+                                <p><strong>Regla:</strong> Si stock ≥ umbral_despausa → Publicación se despausa (published=True)</p>
+                            </div>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Información" name="info">
+                            <group>
+                                <div class="alert alert-info" role="alert">
+                                    <h4>Configuración de TiendaNube</h4>
+                                    <p>Configura las credenciales de tu aplicación TiendaNube.</p>
+                                    <p>Puedes obtenerlas desde el panel de socios tecnológicos de TiendaNube.</p>
+                                    <ul>
+                                        <li><strong>Client ID</strong>: ID de tu aplicación (obligatorio)</li>
+                                        <li><strong>Client Secret</strong>: Secreto de tu aplicación (obligatorio)</li>
+                                        <li><strong>Access Token</strong>: Token de acceso actual (se obtiene automáticamente con "Autorizar Aplicación")</li>
+                                        <li><strong>Refresh Token</strong>: Token para renovar el acceso (se obtiene automáticamente con "Autorizar Aplicación")</li>
+                                        <li><strong>Store ID</strong>: ID de tu tienda en TiendaNube (obligatorio)</li>
+                                        <li><strong>API Base URL</strong>: URL base de la API (por defecto: https://api.tiendanube.com/v1)</li>
+                                    </ul>
+                                    <p><strong>Pasos para configurar:</strong></p>
+                                    <ol>
+                                        <li>Configura <strong>Client ID</strong> y <strong>Client Secret</strong> (obténlos desde el panel de socios tecnológicos de TiendaNube)</li>
+                                        <li>Configura el <strong>Store ID</strong> de tu tienda</li>
+                                        <li>Haz clic en <strong>"Autorizar Aplicación"</strong> para obtener los tokens automáticamente (recomendado)</li>
+                                        <li>O configura manualmente <strong>Access Token</strong> y <strong>Refresh Token</strong> si ya los tienes</li>
+                                        <li>Usa <strong>"Probar Conexión"</strong> para validar tus credenciales</li>
+                                    </ol>
+                                    <p><strong>Nota:</strong> Si no tienes Refresh Token, usa el botón "Autorizar Aplicación" para obtenerlo automáticamente mediante OAuth.</p>
+                                </div>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Acción de menú -->
+    <record id="action_tn_config" model="ir.actions.server">
+        <field name="name">Configuración TiendaNube</field>
+        <field name="model_id" ref="model_tn_config"/>
+        <field name="state">code</field>
+        <field name="code">action = model.action_open_config()</field>
+    </record>
+
+</odoo>
+
