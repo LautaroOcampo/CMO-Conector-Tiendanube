@@ -19,7 +19,7 @@ Features:
 * Export Odoo products to TiendaNube
 * Import products from TiendaNube into Odoo
 * Sync images, variants and attributes
-* Sync stock and prices (manual or automatic)
+* Sync stock (manual or automatic)
 * Import sales via webhook notifications and polling
 * OAuth 2.0 authentication and token management
 * Automatic pause/unpause based on minimum stock rules
