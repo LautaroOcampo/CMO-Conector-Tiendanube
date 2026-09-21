@@ -1,0 +1,84 @@
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan">TiendaNube Connector for Odoo</h2>
+        <h3 class="oe_slogan text-muted">Sync products, stock and orders with TiendaNube</h3>
+        <div class="oe_demo oe_screenshot text-center mt16">
+            <img src="icon.png" alt="TiendaNube Connector" style="max-width:128px;"/>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <h3 class="oe_slogan">External service required</h3>
+        <p class="text-center">
+            This app integrates Odoo with the <strong>TiendaNube (Nuvemshop) API</strong>.
+            You need a TiendaNube store and a partner application
+            (Client ID / Client Secret). After OAuth authorization, product,
+            stock and order data are exchanged with TiendaNube servers.
+        </p>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <h3 class="oe_slogan">Main features</h3>
+        <div class="oe_span6">
+            <div class="oe_mt32">
+                <ul>
+                    <li>Export Odoo products to TiendaNube</li>
+                    <li>Import products from TiendaNube into Odoo</li>
+                    <li>Sync images, variants and attributes</li>
+                    <li>Stock synchronization (manual or automatic)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="oe_span6">
+            <div class="oe_mt32">
+                <ul>
+                    <li>OAuth 2.0 authentication and token management</li>
+                    <li>Order sync via webhooks and scheduled polling</li>
+                    <li>Auto-link publications to Odoo products by SKU</li>
+                    <li>Pause / unpause publications based on minimum stock</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <h3 class="oe_slogan">How it works</h3>
+        <ol>
+            <li>Install the module and open TiendaNube Configuration in Odoo.</li>
+            <li>Enter Client ID and Client Secret from your TiendaNube partner app.</li>
+            <li>Authorize the application (OAuth) to obtain access tokens and store ID.</li>
+            <li>Import or create publications, then sync stock as needed.</li>
+            <li>Enable webhooks and/or polling to import sales into Odoo.</li>
+        </ol>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <h3 class="oe_slogan">Data &amp; privacy</h3>
+        <p>
+            When authorized, the connector sends and receives data required for
+            e-commerce operations (products, variants, stock, orders and
+            related customer/shipping fields provided by TiendaNube). Credentials
+            and tokens are stored in your Odoo database. No activation key is
+            required; you keep ownership of your data at all times.
+        </p>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <h3 class="oe_slogan">Support</h3>
+        <p class="text-center">
+            Author: Galarreta<br/>
+            Support:
+            <a href="mailto:lautaro@galarreta.co">lautaro@galarreta.co</a>
+        </p>
+    </div>
+</section>

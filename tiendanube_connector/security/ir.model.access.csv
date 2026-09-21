@@ -1,0 +1,53 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tn_publication_user,tn.publication.user,model_tn_publication,tiendanube_connector.group_tn_user,1,0,0,0
+access_tn_publication_manager,tn.publication.manager,model_tn_publication,tiendanube_connector.group_tn_manager,1,1,1,0
+access_tn_publication_admin,tn.publication.admin,model_tn_publication,tiendanube_connector.group_tn_admin,1,1,1,1
+access_tn_publication_image_user,tn.publication.image.user,model_tn_publication_image,tiendanube_connector.group_tn_user,1,0,0,0
+access_tn_publication_image_manager,tn.publication.image.manager,model_tn_publication_image,tiendanube_connector.group_tn_manager,1,1,1,1
+access_tn_publication_image_admin,tn.publication.image.admin,model_tn_publication_image,tiendanube_connector.group_tn_admin,1,1,1,1
+access_tn_publication_variant_user,tn.publication.variant.user,model_tn_publication_variant,tiendanube_connector.group_tn_user,1,0,0,0
+access_tn_publication_variant_manager,tn.publication.variant.manager,model_tn_publication_variant,tiendanube_connector.group_tn_manager,1,1,1,1
+access_tn_publication_variant_admin,tn.publication.variant.admin,model_tn_publication_variant,tiendanube_connector.group_tn_admin,1,1,1,1
+access_tn_publication_attribute_user,tn.publication.attribute.user,model_tn_publication_attribute,tiendanube_connector.group_tn_user,1,0,0,0
+access_tn_publication_attribute_manager,tn.publication.attribute.manager,model_tn_publication_attribute,tiendanube_connector.group_tn_manager,1,1,1,1
+access_tn_publication_attribute_admin,tn.publication.attribute.admin,model_tn_publication_attribute,tiendanube_connector.group_tn_admin,1,1,1,1
+access_tn_sync_service_user,tn.sync.service.user,model_tn_sync_service,tiendanube_connector.group_tn_user,1,0,0,0
+access_tn_sync_service_manager,tn.sync.service.manager,model_tn_sync_service,tiendanube_connector.group_tn_manager,1,0,0,0
+access_tn_sync_service_admin,tn.sync.service.admin,model_tn_sync_service,tiendanube_connector.group_tn_admin,1,0,0,0
+access_tn_config_user,tn.config.user,model_tn_config,tiendanube_connector.group_tn_user,1,0,0,0
+access_tn_config_manager,tn.config.manager,model_tn_config,tiendanube_connector.group_tn_manager,1,1,1,0
+access_tn_config_admin,tn.config.admin,model_tn_config,tiendanube_connector.group_tn_admin,1,1,1,1
+access_tn_publication_tag_user,tn.publication.tag.user,model_tn_publication_tag,tiendanube_connector.group_tn_user,1,0,0,0
+access_tn_publication_tag_manager,tn.publication.tag.manager,model_tn_publication_tag,tiendanube_connector.group_tn_manager,1,1,1,1
+access_tn_publication_tag_admin,tn.publication.tag.admin,model_tn_publication_tag,tiendanube_connector.group_tn_admin,1,1,1,1
+access_tn_publication_category_user,tn.publication.category.user,model_tn_publication_category,tiendanube_connector.group_tn_user,1,0,0,0
+access_tn_publication_category_manager,tn.publication.category.manager,model_tn_publication_category,tiendanube_connector.group_tn_manager,1,1,1,1
+access_tn_publication_category_admin,tn.publication.category.admin,model_tn_publication_category,tiendanube_connector.group_tn_admin,1,1,1,1
+access_tn_sale_order_user,tn.sale.order.user,model_tn_sale_order,tiendanube_connector.group_tn_user,1,0,0,0
+access_tn_sale_order_manager,tn.sale.order.manager,model_tn_sale_order,tiendanube_connector.group_tn_manager,1,1,1,0
+access_tn_sale_order_admin,tn.sale.order.admin,model_tn_sale_order,tiendanube_connector.group_tn_admin,1,1,1,1
+access_tn_sale_order_line_user,tn.sale.order.line.user,model_tn_sale_order_line,tiendanube_connector.group_tn_user,1,0,0,0
+access_tn_sale_order_line_manager,tn.sale.order.line.manager,model_tn_sale_order_line,tiendanube_connector.group_tn_manager,1,1,1,0
+access_tn_sale_order_line_admin,tn.sale.order.line.admin,model_tn_sale_order_line,tiendanube_connector.group_tn_admin,1,1,1,1
+access_tn_create_publication_wizard_user,tn.create.publication.wizard.user,model_tn_create_publication_wizard,tiendanube_connector.group_tn_user,1,1,1,1
+access_tn_create_publication_wizard_manager,tn.create.publication.wizard.manager,model_tn_create_publication_wizard,tiendanube_connector.group_tn_manager,1,1,1,1
+access_tn_create_publication_wizard_admin,tn.create.publication.wizard.admin,model_tn_create_publication_wizard,tiendanube_connector.group_tn_admin,1,1,1,1
+access_tn_webhook_notification_user,tn.webhook.notification.user,model_tn_webhook_notification,tiendanube_connector.group_tn_user,1,0,0,0
+access_tn_webhook_notification_manager,tn.webhook.notification.manager,model_tn_webhook_notification,tiendanube_connector.group_tn_manager,1,1,0,0
+access_tn_webhook_notification_admin,tn.webhook.notification.admin,model_tn_webhook_notification,tiendanube_connector.group_tn_admin,1,1,1,1
+access_tn_import_orders_wizard_user,tn.import.orders.wizard.user,model_tn_import_orders_wizard,tiendanube_connector.group_tn_user,1,1,1,1
+access_tn_import_orders_wizard_manager,tn.import.orders.wizard.manager,model_tn_import_orders_wizard,tiendanube_connector.group_tn_manager,1,1,1,1
+access_tn_import_orders_wizard_admin,tn.import.orders.wizard.admin,model_tn_import_orders_wizard,tiendanube_connector.group_tn_admin,1,1,1,1
+access_tn_sync_log_user,tn.sync.log user,model_tn_sync_log,tiendanube_connector.group_tn_user,1,0,0,0
+access_tn_sync_log_manager,tn.sync.log manager,model_tn_sync_log,tiendanube_connector.group_tn_manager,1,0,0,0
+access_tn_sync_log_admin,tn.sync.log admin,model_tn_sync_log,tiendanube_connector.group_tn_admin,1,0,0,1
+access_tn_publication_values_wizard_user,tn.publication.values.wizard user,model_tn_publication_values_wizard,tiendanube_connector.group_tn_user,1,1,1,1
+access_tn_publication_values_wizard_manager,tn.publication.values.wizard manager,model_tn_publication_values_wizard,tiendanube_connector.group_tn_manager,1,1,1,1
+access_tn_publication_values_wizard_admin,tn.publication.values.wizard admin,model_tn_publication_values_wizard,tiendanube_connector.group_tn_admin,1,1,1,1
+access_tn_publication_values_wizard_image_user,tn.publication.values.wizard.image user,model_tn_publication_values_wizard_image,tiendanube_connector.group_tn_user,1,1,1,1
+access_tn_publication_values_wizard_image_manager,tn.publication.values.wizard.image manager,model_tn_publication_values_wizard_image,tiendanube_connector.group_tn_manager,1,1,1,1
+access_tn_publication_values_wizard_image_admin,tn.publication.values.wizard.image admin,model_tn_publication_values_wizard_image,tiendanube_connector.group_tn_admin,1,1,1,1
+access_tn_oauth_tenant_manager,tn.oauth.tenant manager,model_tn_oauth_tenant,tiendanube_connector.group_tn_manager,1,1,1,0
+access_tn_oauth_tenant_admin,tn.oauth.tenant admin,model_tn_oauth_tenant,tiendanube_connector.group_tn_admin,1,1,1,1
+access_tn_oauth_pending_manager,tn.oauth.pending manager,model_tn_oauth_pending,tiendanube_connector.group_tn_manager,1,0,0,0
+access_tn_oauth_pending_admin,tn.oauth.pending admin,model_tn_oauth_pending,tiendanube_connector.group_tn_admin,1,1,1,1

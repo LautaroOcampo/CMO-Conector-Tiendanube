@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Privilegio TN (Odoo 19+: category_id va en res.groups.privilege, no en res.groups) -->
+        <record id="res_groups_privilege_tiendanube" model="res.groups.privilege">
+            <field name="name">TiendaNube</field>
+            <field name="sequence">51</field>
+            <field name="category_id" ref="base.module_category_sales_sales"/>
+        </record>
+
+        <!-- Usuario TN: consulta publicaciones, ventas TN, notificaciones (solo lectura en lo sensible). -->
+        <record id="group_tn_user" model="res.groups">
+            <field name="name">Usuario TiendaNube</field>
+            <field name="sequence">10</field>
+            <field name="privilege_id" ref="res_groups_privilege_tiendanube"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <!-- Gestor TN: operaciones (importar, sincronizar, webhooks, configuración sin secretos críticos). -->
+        <record id="group_tn_manager" model="res.groups">
+            <field name="name">Gestor TiendaNube</field>
+            <field name="sequence">20</field>
+            <field name="privilege_id" ref="res_groups_privilege_tiendanube"/>
+            <field name="implied_ids" eval="[(4, ref('group_tn_user'))]"/>
+        </record>
+
+        <!-- Administrador TN: credenciales API, tokens y borrado de configuración. -->
+        <record id="group_tn_admin" model="res.groups">
+            <field name="name">Administrador TiendaNube</field>
+            <field name="sequence">30</field>
+            <field name="privilege_id" ref="res_groups_privilege_tiendanube"/>
+            <field name="implied_ids" eval="[(4, ref('group_tn_manager'))]"/>
+        </record>
+    </data>
+</odoo>
