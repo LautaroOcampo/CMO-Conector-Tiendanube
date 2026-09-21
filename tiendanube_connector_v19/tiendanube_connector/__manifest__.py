@@ -34,6 +34,10 @@ Features:
 
     'depends': ['base', 'product', 'sale', 'stock', 'mail', 'account'],
 
+    'images': [
+        'static/description/main_screenshot.png',
+    ],
+
     'data': [
         'security/tn_security.xml',
         'security/ir.model.access.csv',
