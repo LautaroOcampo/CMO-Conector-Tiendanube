@@ -30,9 +30,9 @@ Features:
     'support': "lautaro@galarreta.co",
 
     'category': 'Sales',
-    'version': '19.0.1.0.38',
+    'version': '19.0.1.0.39',
 
-    'depends': ['base', 'product', 'sale', 'stock', 'mail', 'account', 'l10n_ar'],
+    'depends': ['base', 'product', 'sale', 'stock', 'mail', 'account'],
 
     'data': [
         'security/tn_security.xml',
