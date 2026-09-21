@@ -2,7 +2,7 @@
 {
     'name': "TiendaNube Connector",
 
-    'summary': "Sync products, stock, prices and orders between Odoo and TiendaNube",
+    'summary': "Sync products, stock and orders between Odoo and TiendaNube",
 
     'description': """
 TiendaNube Connector
@@ -11,7 +11,7 @@ TiendaNube Connector
 Connect Odoo with the TiendaNube (Nuvemshop) API.
 
 Requires an active TiendaNube partner application and store
-(external service). Authorization uses OAuth 2.0; product, stock, price
+(external service). Authorization uses OAuth 2.0; product, stock
 and order data are exchanged with TiendaNube servers.
 
 Features:
