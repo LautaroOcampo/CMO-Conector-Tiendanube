@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "TiendaNube Connector",
+    'name': "TiendaNube Connector Galarreta",
 
     'summary': "Sync products, stock and orders between Odoo and TiendaNube",
 
