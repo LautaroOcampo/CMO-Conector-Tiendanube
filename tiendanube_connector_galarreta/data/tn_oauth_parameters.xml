@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Vacío = esta base autoriza directo contra TiendaNube (desarrollo / una sola DB).
+             En producción: URL del Odoo hub (sin barra final) y el mismo secreto en hub y en cada tienda. -->
+        <record id="icp_oauth_hub_url" model="ir.config_parameter">
+            <field name="key">tiendanube_connector.oauth_hub_url</field>
+            <field name="value"></field>
+        </record>
+        <record id="icp_oauth_shared_secret" model="ir.config_parameter">
+            <field name="key">tiendanube_connector.oauth_shared_secret</field>
+            <field name="value"></field>
+        </record>
+    </data>
+</odoo>

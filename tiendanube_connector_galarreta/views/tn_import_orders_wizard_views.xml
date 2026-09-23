@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tn_import_orders_wizard_form" model="ir.ui.view">
+        <field name="name">tn.import.orders.wizard.form</field>
+        <field name="model">tn.import.orders.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Importar ventas / reintento webhook">
+                <sheet>
+                    <group>
+                        <field name="tn_config_id" readonly="1"/>
+                        <field name="import_mode" widget="radio"/>
+                    </group>
+                    <group string="Últimas horas" invisible="import_mode != 'hours'">
+                        <field name="hours_back"/>
+                        <div class="alert alert-info" role="alert" colspan="2">
+                            <p>
+                                Consulta la API de TiendaNube por ventas creadas entre
+                                <strong>ahora menos N horas</strong> y <strong>ahora</strong>
+                                (mismo criterio que el polling, pero sin depender del cron).
+                            </p>
+                        </div>
+                    </group>
+                    <group string="Rango de fechas" invisible="import_mode != 'dates'">
+                        <field name="date_from"/>
+                        <field name="date_to" placeholder="Vacío = hasta hoy"/>
+                        <div class="alert alert-info" role="alert" colspan="2">
+                            <p>
+                                Importa ventas creadas en TiendaNube entre las fechas indicadas (día completo).
+                            </p>
+                        </div>
+                    </group>
+                    <group string="Webhooks">
+                        <field name="retry_webhook_notifications"/>
+                        <div class="alert alert-info" role="alert" colspan="2">
+                            <p>
+                                Si está activado, después de la importación por API se reprocesan las
+                                notificaciones <strong>Pendiente</strong> o <strong>Fallida</strong>
+                                vinculadas a esta cuenta: se vuelve a pedir la orden a TiendaNube y se crea/actualiza en Odoo.
+                            </p>
+                        </div>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_import_orders"
+                            string="Ejecutar"
+                            type="object"
+                            class="oe_highlight"/>
+                    <button string="Cancelar"
+                            class="btn-secondary"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
