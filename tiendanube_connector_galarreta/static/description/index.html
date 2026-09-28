@@ -14,8 +14,8 @@
         <p class="text-center">
             This app integrates Odoo with the <strong>TiendaNube (Nuvemshop) API</strong>.
             A TiendaNube store and a partner application (Client ID / Client Secret) are required.
-            After a one-click OAuth authorization, all product, stock and order data
-            flows securely between your Odoo instance and TiendaNube servers.
+            After you authorize the app with OAuth, products, stock and orders
+            are exchanged between your Odoo instance and TiendaNube servers.
         </p>
     </div>
 </section>
@@ -27,11 +27,11 @@
             <div class="oe_mt32">
                 <h4>Products &amp; Stock</h4>
                 <ul>
-                    <li>Publish Odoo products to TiendaNube in one click</li>
+                    <li>Create publications from Odoo products and export them to TiendaNube</li>
                     <li>Import existing TiendaNube publications into Odoo</li>
-                    <li>Sync images, variants and attributes automatically</li>
-                    <li>Keep stock levels accurate across both platforms</li>
-                    <li>Auto-pause publications when stock runs out — and reactivate when it's back</li>
+                    <li>Bring images, variants and attributes with each publication</li>
+                    <li>Push stock from Odoo to TiendaNube, on demand or automatically when you enable it</li>
+                    <li>Pause and republish listings when stock crosses the thresholds you set</li>
                 </ul>
             </div>
         </div>
@@ -39,11 +39,11 @@
             <div class="oe_mt32">
                 <h4>Orders &amp; Customers</h4>
                 <ul>
-                    <li>Import TiendaNube orders into Odoo as sales orders in real time</li>
-                    <li>Customer records created automatically from order data</li>
-                    <li>Match TiendaNube products to Odoo products by SKU</li>
-                    <li>Secure one-click connection via OAuth 2.0</li>
-                    <li>Scheduled polling as backup for guaranteed order capture</li>
+                    <li>Import TiendaNube orders and create Odoo sales orders</li>
+                    <li>Webhooks import orders as they arrive; a poll every 10 minutes catches what the webhook missed</li>
+                    <li>Match publications and order lines to Odoo products by SKU</li>
+                    <li>Optionally create and post the customer invoice when an order is imported</li>
+                    <li>Connect the store with OAuth 2.0; tokens stay in your Odoo database</li>
                 </ul>
             </div>
         </div>
@@ -54,11 +54,12 @@
     <div class="oe_row oe_spaced">
         <h3 class="oe_slogan">Up and running in minutes</h3>
         <ol>
-            <li>Install the module and open <strong>TiendaNube Configuration</strong> in Odoo.</li>
-            <li>Enter the Client ID and Client Secret from your TiendaNube partner app.</li>
-            <li>Click <strong>Authorize</strong> to connect your store tokens are managed automatically.</li>
-            <li>Import your existing publications or create new ones directly from Odoo.</li>
-            <li>Enable real-time order import and stock sync and you're done.</li>
+            <li>Install the module and open <strong>TiendaNube → Configuration</strong>.</li>
+            <li>Enter the <strong>Client ID</strong> and <strong>Client Secret</strong> from your TiendaNube partner app on that configuration. Saving copies them into the system parameters; you do not enter them there by hand.</li>
+            <li>Click <strong>Authorize Application</strong> and sign in on TiendaNube. Store ID and tokens are filled in automatically. Then use <strong>Test Connection</strong>.</li>
+            <li>Choose the warehouse and stock type, and set the customer contact used on sales orders and invoices.</li>
+            <li>Import existing publications, or create them from Odoo products and export them.</li>
+            <li>Turn on automatic stock sync, minimum-stock pause and automatic invoicing if you want them. Order webhooks and polling are already on.</li>
         </ol>
     </div>
 </section>
