@@ -1,83 +1,88 @@
 <section class="oe_container">
     <div class="oe_row oe_spaced">
         <h2 class="oe_slogan">TiendaNube Connector for Odoo</h2>
-        <h3 class="oe_slogan text-muted">Sync products, stock and orders with TiendaNube</h3>
+        <h3 class="oe_slogan text-muted">The complete bridge between your Odoo backend and your TiendaNube store</h3>
         <div class="oe_demo oe_screenshot text-center mt16">
             <img src="icon.png" alt="TiendaNube Connector" style="max-width:128px;"/>
         </div>
     </div>
 </section>
 
-<section class="oe_container">
+<section class="oe_container oe_dark">
     <div class="oe_row oe_spaced">
         <h3 class="oe_slogan">External service required</h3>
         <p class="text-center">
             This app integrates Odoo with the <strong>TiendaNube (Nuvemshop) API</strong>.
-            You need a TiendaNube store and a partner application
-            (Client ID / Client Secret). After OAuth authorization, product,
-            stock and order data are exchanged with TiendaNube servers.
+            A TiendaNube store and a partner application (Client ID / Client Secret) are required.
+            After a one-click OAuth authorization, all product, stock and order data
+            flows securely between your Odoo instance and TiendaNube servers.
         </p>
-    </div>
-</section>
-
-<section class="oe_container oe_dark">
-    <div class="oe_row oe_spaced">
-        <h3 class="oe_slogan">Main features</h3>
-        <div class="oe_span6">
-            <div class="oe_mt32">
-                <ul>
-                    <li>Export Odoo products to TiendaNube</li>
-                    <li>Import products from TiendaNube into Odoo</li>
-                    <li>Sync images, variants and attributes</li>
-                    <li>Stock synchronization (manual or automatic)</li>
-                </ul>
-            </div>
-        </div>
-        <div class="oe_span6">
-            <div class="oe_mt32">
-                <ul>
-                    <li>OAuth 2.0 authentication and token management</li>
-                    <li>Order sync via webhooks and scheduled polling</li>
-                    <li>Auto-link publications to Odoo products by SKU</li>
-                    <li>Pause / unpause publications based on minimum stock</li>
-                </ul>
-            </div>
-        </div>
     </div>
 </section>
 
 <section class="oe_container">
     <div class="oe_row oe_spaced">
-        <h3 class="oe_slogan">How it works</h3>
+        <h3 class="oe_slogan">Everything you need to run your store from Odoo</h3>
+        <div class="oe_span6">
+            <div class="oe_mt32">
+                <h4>📦 Products &amp; Stock</h4>
+                <ul>
+                    <li>Publish Odoo products to TiendaNube in one click</li>
+                    <li>Import existing TiendaNube publications into Odoo</li>
+                    <li>Sync images, variants and attributes automatically</li>
+                    <li>Keep stock levels accurate across both platforms</li>
+                    <li>Auto-pause publications when stock runs out — and reactivate when it's back</li>
+                </ul>
+            </div>
+        </div>
+        <div class="oe_span6">
+            <div class="oe_mt32">
+                <h4>🛒 Orders &amp; Customers</h4>
+                <ul>
+                    <li>Import TiendaNube orders into Odoo as sales orders in real time</li>
+                    <li>Customer records created automatically from order data</li>
+                    <li>Match TiendaNube products to Odoo products by SKU</li>
+                    <li>Secure one-click connection via OAuth 2.0</li>
+                    <li>Scheduled polling as backup for guaranteed order capture</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <h3 class="oe_slogan">Up and running in minutes</h3>
         <ol>
-            <li>Install the module and open TiendaNube Configuration in Odoo.</li>
-            <li>Enter Client ID and Client Secret from your TiendaNube partner app.</li>
-            <li>Authorize the application (OAuth) to obtain access tokens and store ID.</li>
-            <li>Import or create publications, then sync stock as needed.</li>
-            <li>Enable webhooks and/or polling to import sales into Odoo.</li>
+            <li>Install the module and open <strong>TiendaNube Configuration</strong> in Odoo.</li>
+            <li>Enter the Client ID and Client Secret from your TiendaNube partner app.</li>
+            <li>Click <strong>Authorize</strong> to connect your store — tokens are managed automatically.</li>
+            <li>Import your existing publications or create new ones directly from Odoo.</li>
+            <li>Enable real-time order import and stock sync — and you're done.</li>
         </ol>
     </div>
 </section>
 
-<section class="oe_container oe_dark">
+<section class="oe_container">
     <div class="oe_row oe_spaced">
         <h3 class="oe_slogan">Data &amp; privacy</h3>
         <p>
-            When authorized, the connector sends and receives data required for
-            e-commerce operations (products, variants, stock, orders and
-            related customer/shipping fields provided by TiendaNube). Credentials
-            and tokens are stored in your Odoo database. No activation key is
-            required; you keep ownership of your data at all times.
+            Once authorized, the connector exchanges only the data required for
+            e-commerce operations — products, variants, stock levels, orders and
+            the customer and shipping details provided by TiendaNube.
+            All credentials and tokens are stored exclusively in your own Odoo database.
+            No activation key, no third-party server, no lock-in.
+            You own your data at all times.
         </p>
     </div>
 </section>
 
-<section class="oe_container">
+<section class="oe_container oe_dark">
     <div class="oe_row oe_spaced">
         <h3 class="oe_slogan">Support</h3>
         <p class="text-center">
-            Author: Galarreta<br/>
-            Support:
+            Developed and maintained by <strong>Galarreta</strong><br/>
+            For questions, issues or feature requests:<br/>
             <a href="mailto:lautaro@galarreta.co">lautaro@galarreta.co</a>
         </p>
     </div>
