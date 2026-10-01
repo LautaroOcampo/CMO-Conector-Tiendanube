@@ -32,7 +32,7 @@ class TnOauthTenant(models.Model):
     shared_secret = fields.Char(
         string='Secreto compartido',
         copy=False,
-        groups='tiendanube_connector.group_tn_manager',
+        groups='tiendanube_connector_galarreta.group_tn_admin',
     )
     active = fields.Boolean(default=True)
     last_authorized_at = fields.Datetime(readonly=True, copy=False)
@@ -88,8 +88,22 @@ class TnOauthTenant(models.Model):
             return False
         return (got.netloc or '').lower() == (allowed.netloc or '').lower()
 
+    def _is_this_odoo(self):
+        """True si este tenant es esta misma base (no POSTear install a sí mismo)."""
+        self.ensure_one()
+        web_base = (
+            self.env['ir.config_parameter'].sudo().get_param('web.base.url') or ''
+        ).rstrip('/')
+        return bool(web_base) and self._return_url_allowed(web_base)
+
     def _hub_secret(self):
-        return self.env['tn.config']._oauth_hub_secret()
+        if 'tn.oauth.hub.config' in self.env:
+            secret = self.env['tn.oauth.hub.config']._oauth_hub_secret()
+            if secret:
+                return secret
+        if 'tn.config' in self.env:
+            return self.env['tn.config']._oauth_hub_secret()
+        return ''
 
     def _sign(self, message):
         secret = (self._hub_secret() or '').encode('utf-8')
@@ -103,7 +117,7 @@ class TnOauthTenant(models.Model):
             return False
         if abs(time.time() - ts_int) > _START_TTL_SECONDS:
             return False
-        secret = (self.env['tn.config']._oauth_hub_secret() or '').encode('utf-8')
+        secret = (self._hub_secret() or '').encode('utf-8')
         if not secret:
             return False
         expected = hmac.new(

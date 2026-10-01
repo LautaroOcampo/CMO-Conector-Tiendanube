@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="1">
-        <!-- Vacío = esta base autoriza directo contra TiendaNube (desarrollo / una sola DB).
-             En producción: URL del Odoo hub (sin barra final) y el mismo secreto en hub y en cada tienda. -->
-        <record id="icp_oauth_hub_url" model="ir.config_parameter">
-            <field name="key">tiendanube_connector.oauth_hub_url</field>
-            <field name="value"></field>
-        </record>
-        <record id="icp_oauth_shared_secret" model="ir.config_parameter">
-            <field name="key">tiendanube_connector.oauth_shared_secret</field>
-            <field name="value"></field>
-        </record>
-    </data>
+    <!-- No cargar este archivo en el manifiesto.
+
+         Las claves tiendanube_connector.oauth_hub_url y
+         tiendanube_connector.oauth_shared_secret se aseguran en
+         post_init_hook (set_param solo si la key no existe).
+
+         Crear ir.config_parameter por XML falla tras el rename a
+         *_galarreta: el XML ID es otro módulo, pero la key es la misma
+         (unique) y puede existir por el hub o una instalación anterior.
+    -->
 </odoo>

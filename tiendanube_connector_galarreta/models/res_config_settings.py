@@ -60,7 +60,7 @@ class ResConfigSettings(models.TransientModel):
         string='Habilitar endpoint de prueba /tiendanube/webhook/test',
         config_parameter='tiendanube_connector.webhook_test_endpoint_enabled',
         default=False,
-        groups='tiendanube_connector.group_tn_admin',
+        groups='tiendanube_connector_galarreta.group_tn_admin',
         help='Solo usuarios del grupo Administración / Ajustes. Desactivar en producción: evita exponer un '
              'endpoint de diagnóstico. En desarrollo se puede activar temporalmente.',
     )

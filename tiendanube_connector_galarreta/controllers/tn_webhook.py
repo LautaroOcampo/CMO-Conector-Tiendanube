@@ -35,7 +35,7 @@ class TNWebhookController(http.Controller):
         """Endpoint de prueba (solo administradores y si está habilitado en parámetros del sistema)."""
         if not (
             request.env.user.has_group('base.group_system')
-            or request.env.user.has_group('tiendanube_connector.group_tn_admin')
+            or request.env.user.has_group('tiendanube_connector_galarreta.group_tn_admin')
         ):
             return request.make_response(
                 json.dumps({

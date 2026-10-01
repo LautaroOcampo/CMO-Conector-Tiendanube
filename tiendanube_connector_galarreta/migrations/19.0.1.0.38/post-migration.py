@@ -12,12 +12,19 @@ from odoo import SUPERUSER_ID, api
 
 _logger = logging.getLogger(__name__)
 
-XMLID = 'tiendanube_connector.ir_cron_sync_stock_tiendanube'
+XMLID_CANDIDATES = (
+    'tiendanube_connector_galarreta.ir_cron_sync_stock_tiendanube',
+    'tiendanube_connector.ir_cron_sync_stock_tiendanube',
+)
 
 
 def migrate(cr, version):
     env = api.Environment(cr, SUPERUSER_ID, {})
-    cron = env.ref(XMLID, raise_if_not_found=False)
+    cron = False
+    for xmlid in XMLID_CANDIDATES:
+        cron = env.ref(xmlid, raise_if_not_found=False)
+        if cron:
+            break
     if cron:
         _logger.info('TN: eliminando cron de stock «%s» (ID %s)', cron.name, cron.id)
         cron.unlink()

@@ -21,17 +21,17 @@
         <field name="arch" type="xml">
             <form string="Configuración TiendaNube">
                 <header>
-                    <button name="action_authorize" string="Autorizar Aplicación" type="object" class="oe_highlight" icon="fa-key" groups="tiendanube_connector.group_tn_manager"/>
-                    <button name="action_test_connection" string="Probar Conexión" type="object" class="btn-primary" icon="fa-plug" groups="tiendanube_connector.group_tn_manager"/>
-                    <button name="action_refresh_token" string="Refrescar Token" type="object" class="btn-secondary" icon="fa-refresh" groups="tiendanube_connector.group_tn_manager"/>
-                    <button name="action_import_publications" string="Importar Publicaciones" type="object" class="oe_highlight" icon="fa-download" groups="tiendanube_connector.group_tn_manager" invisible="import_publications_active"/>
-                    <button name="action_stop_import_publications" string="Detener importación" type="object" class="btn-warning" icon="fa-stop" groups="tiendanube_connector.group_tn_manager" invisible="not import_publications_active"/>
-                    <button name="action_verify_webhook" string="Verificar Webhook" type="object" class="btn-primary" icon="fa-bell" groups="tiendanube_connector.group_tn_manager"/>
-                    <button name="action_recreate_webhook" string="Sincronizar Webhook" type="object" class="btn-secondary" icon="fa-refresh" groups="tiendanube_connector.group_tn_manager"/>
-                    <button name="action_auto_link_all_products_by_sku" string="Auto-relacionar Productos por SKU" type="object" class="btn-secondary" icon="fa-link" groups="tiendanube_connector.group_tn_manager"/>
-                    <button name="action_view_stock_sync_publications" string="Ver Publicaciones que Sincronizarían Stock" type="object" class="btn-secondary" icon="fa-eye" groups="tiendanube_connector.group_tn_manager"/>
-                    <button name="action_sync_all_stocks" string="Sincronizar Todos los Stocks" type="object" class="oe_highlight" icon="fa-cubes" groups="tiendanube_connector.group_tn_manager"/>
-                    <button name="action_sync_orders_now" string="Importar ventas / reintento webhook" type="object" class="btn-primary" icon="fa-download" groups="tiendanube_connector.group_tn_manager"/>
+                    <button name="action_authorize" string="Autorizar Aplicación" type="object" class="oe_highlight" icon="fa-key"/>
+                    <button name="action_test_connection" string="Probar Conexión" type="object" class="btn-primary" icon="fa-plug"/>
+                    <button name="action_refresh_token" string="Refrescar Token" type="object" class="btn-secondary" icon="fa-refresh"/>
+                    <button name="action_import_publications" string="Importar Publicaciones" type="object" class="oe_highlight" icon="fa-download" invisible="import_publications_active"/>
+                    <button name="action_stop_import_publications" string="Detener importación" type="object" class="btn-warning" icon="fa-stop" invisible="not import_publications_active"/>
+                    <button name="action_verify_webhook" string="Verificar Webhook" type="object" class="btn-primary" icon="fa-bell"/>
+                    <button name="action_recreate_webhook" string="Sincronizar Webhook" type="object" class="btn-secondary" icon="fa-refresh"/>
+                    <button name="action_auto_link_all_products_by_sku" string="Auto-relacionar Productos por SKU" type="object" class="btn-secondary" icon="fa-link"/>
+                    <button name="action_view_stock_sync_publications" string="Ver Publicaciones que Sincronizarían Stock" type="object" class="btn-secondary" icon="fa-eye"/>
+                    <button name="action_sync_all_stocks" string="Sincronizar Todos los Stocks" type="object" class="oe_highlight" icon="fa-cubes"/>
+                    <button name="action_sync_orders_now" string="Importar ventas / reintento webhook" type="object" class="btn-primary" icon="fa-download"/>
                 </header>
                 <sheet>
                     <group>
@@ -42,16 +42,16 @@
                             <field name="oauth_is_hub" invisible="1"/>
                         </group>
                         <group string="Credenciales de API">
-                            <field name="client_id" password="True" placeholder="Client ID" groups="tiendanube_connector.group_tn_manager" invisible="oauth_via_hub and not oauth_is_hub"/>
-                            <field name="client_secret" password="True" placeholder="Client Secret" groups="tiendanube_connector.group_tn_admin" invisible="oauth_via_hub and not oauth_is_hub"/>
+                            <field name="client_id" password="True" placeholder="Client ID" groups="group_tn_admin" invisible="oauth_via_hub and not oauth_is_hub"/>
+                            <field name="client_secret" password="True" placeholder="Client Secret" groups="group_tn_admin" invisible="oauth_via_hub and not oauth_is_hub"/>
                             <div class="alert alert-warning" role="alert" colspan="2" invisible="not oauth_via_hub or oauth_is_hub">
                                 <p><strong>OAuth vía hub activo.</strong> Esta base usa el hub central para autorizar (parámetros <code>tiendanube_connector.oauth_hub_url</code> / <code>oauth_shared_secret</code>). No hace falta Client ID acá: el hub debe tenerlo. Si estás en sandbox y querés autorizar directo, vaciá esos dos parámetros del sistema.</p>
                             </div>
                             <div class="alert alert-info" role="alert" colspan="2" invisible="not oauth_is_hub">
-                                <p><strong>Esta base es el hub OAuth.</strong> Cargá acá el Client ID y Client Secret de la app de TiendaNube. La Redirect URI en TN debe ser la de este Odoo.</p>
+                                <p><strong>Esta base es el hub OAuth</strong> (app central de los clientes) y también puede autorizar una tienda local acá. Usá una tienda TiendaNube <b>distinta</b> a la de cualquier cliente. La Redirect URI en TN debe ser la de este Odoo.</p>
                             </div>
-                            <field name="access_token" password="True" placeholder="Access Token" groups="tiendanube_connector.group_tn_admin"/>
-                            <field name="refresh_token" password="True" placeholder="Refresh Token" groups="tiendanube_connector.group_tn_admin"/>
+                            <field name="access_token" password="True" placeholder="Access Token" groups="group_tn_admin"/>
+                            <field name="refresh_token" password="True" placeholder="Refresh Token" groups="group_tn_admin"/>
                         </group>
                         <group string="Configuración de Tienda">
                             <field name="store_id" placeholder="Store ID"/>

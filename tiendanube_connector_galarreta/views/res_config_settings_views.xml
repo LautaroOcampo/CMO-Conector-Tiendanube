@@ -83,7 +83,7 @@
                         </div>
                         
                         <!-- Endpoint de prueba webhook (solo admin) -->
-                        <div class="col-12 col-lg-6 o_setting_box" groups="tiendanube_connector.group_tn_admin">
+                        <div class="col-12 col-lg-6 o_setting_box" groups="group_tn_admin">
                             <div class="o_setting_left_pane">
                                 <field name="tn_webhook_test_endpoint_enabled"/>
                             </div>

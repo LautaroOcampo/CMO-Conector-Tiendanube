@@ -25,13 +25,13 @@ class TNConfig(models.Model):
     client_id = fields.Char(
         string='Client ID',
         help='Client ID de la aplicación TiendaNube',
-        groups='tiendanube_connector.group_tn_manager',
+        groups='tiendanube_connector_galarreta.group_tn_admin',
     )
 
     client_secret = fields.Char(
         string='Client Secret',
         copy=False,
-        groups='tiendanube_connector.group_tn_admin',
+        groups='tiendanube_connector_galarreta.group_tn_admin',
         help='Client Secret de la aplicación TiendaNube. TiendaNube firma los webhooks con '
              'HMAC-SHA256 del cuerpo raw usando este valor (cabecera x-linkedstore-hmac-sha256); '
              'debe coincidir con el secret de la app en el panel de desarrolladores.'
@@ -40,14 +40,14 @@ class TNConfig(models.Model):
     access_token = fields.Char(
         string='Access Token',
         copy=False,
-        groups='tiendanube_connector.group_tn_admin',
+        groups='tiendanube_connector_galarreta.group_tn_admin',
         help='Access Token de TiendaNube'
     )
 
     refresh_token = fields.Char(
         string='Refresh Token',
         copy=False,
-        groups='tiendanube_connector.group_tn_admin',
+        groups='tiendanube_connector_galarreta.group_tn_admin',
         help='Refresh Token de TiendaNube'
     )
     
@@ -109,7 +109,7 @@ class TNConfig(models.Model):
     oauth_tenant_code = fields.Char(copy=False)
     oauth_shared_secret = fields.Char(
         copy=False,
-        groups='tiendanube_connector.group_tn_admin',
+        groups='tiendanube_connector_galarreta.group_tn_admin',
     )
     oauth_callback_uri = fields.Char(
         string='Redirect URI (app TiendaNube)',
@@ -161,7 +161,7 @@ class TNConfig(models.Model):
     pricelist_id = fields.Many2one(
         'product.pricelist',
         string='Lista de Precios',
-        help='Lista de precios de Odoo que se usará para sincronizar precios con TiendaNube. Si no se selecciona, se usará el precio de lista (list_price).'
+        help='No se usa para copiar precios entre el producto de Odoo y la publicación.'
     )
     
     sale_pricelist_id = fields.Many2one(
@@ -499,6 +499,32 @@ class TNConfig(models.Model):
         base = (self.env['ir.config_parameter'].sudo().get_param('web.base.url') or '').rstrip('/')
         return self._oauth_same_host(self._oauth_hub_url(), base)
 
+    def _oauth_app_credentials(self):
+        """Client ID/Secret de la app TN. En el hub usa la app central (redirect URI única)."""
+        self.ensure_one()
+        if self._oauth_this_is_hub() and 'tn.oauth.hub.config' in self.env:
+            cfg = self.env['tn.oauth.hub.config'].sudo().get_config()
+            if cfg:
+                hcid = (cfg.client_id or '').strip()
+                hsec = (cfg.client_secret or '').strip()
+                if hcid and hsec:
+                    return hcid, hsec
+        cred = self._tn_credentials()
+        return (cred.client_id or '').strip(), (cred.client_secret or '').strip()
+
+    def _ensure_hub_app_credentials_on_config(self):
+        self.ensure_one()
+        if not self._oauth_this_is_hub():
+            return
+        cid, csec = self._oauth_app_credentials()
+        vals = {}
+        if cid and (self.sudo().client_id or '').strip() != cid:
+            vals['client_id'] = cid
+        if csec and (self.sudo().client_secret or '').strip() != csec:
+            vals['client_secret'] = csec
+        if vals:
+            self.sudo().write(vals)
+
     def _verify_oauth_install_signature(self, raw_body, signature):
         """HMAC-SHA256 del body JSON con el secreto del hub (parámetro de sistema)."""
         secret = (self._oauth_hub_secret() or '').encode('utf-8')
@@ -634,7 +660,7 @@ class TNConfig(models.Model):
         """Estado del cron de sincronización de órdenes (global por base de datos)."""
         try:
             cron = self.env.ref(
-                'tiendanube_connector.ir_cron_sync_orders_tiendanube',
+                '%s.ir_cron_sync_orders_tiendanube' % self._module,
                 raise_if_not_found=False
             )
             if cron:
@@ -970,7 +996,7 @@ class TNConfig(models.Model):
         })
 
         cron = self.env.ref(
-            'tiendanube_connector.ir_cron_import_publications_tiendanube',
+            '%s.ir_cron_import_publications_tiendanube' % self._module,
             raise_if_not_found=False,
         )
         if cron:
@@ -1734,4 +1760,44 @@ class TNConfig(models.Model):
         """Auto-relaciona productos de Odoo con publicaciones de TiendaNube por SKU"""
         self.ensure_one()
         return self.env['tn.publication'].action_auto_link_all_products_by_sku()
+
+    @api.model
+    def _retire_manager_group(self):
+        """Quita el grupo Gestor. Quien lo tenía pasa a Admin."""
+        manager = self.env.ref(
+            'tiendanube_connector_galarreta.group_tn_manager',
+            raise_if_not_found=False,
+        )
+        admin = self.env.ref(
+            'tiendanube_connector_galarreta.group_tn_admin',
+            raise_if_not_found=False,
+        )
+        user_group = self.env.ref(
+            'tiendanube_connector_galarreta.group_tn_user',
+            raise_if_not_found=False,
+        )
+        for xmlid in (
+            'tiendanube_connector_galarreta.access_tn_webhook_notification_user',
+            'tiendanube_connector_galarreta.access_tn_sync_log_user',
+            'tiendanube_connector_galarreta.access_tn_import_orders_wizard_user',
+        ):
+            rec = self.env.ref(xmlid, raise_if_not_found=False)
+            if rec:
+                rec.sudo().unlink()
+        if not manager:
+            return
+        if admin:
+            if manager.user_ids:
+                manager.user_ids.sudo().write({
+                    'group_ids': [(4, admin.id), (3, manager.id)],
+                })
+            implied = [(3, manager.id)]
+            if user_group:
+                implied.append((4, user_group.id))
+            admin.sudo().write({'implied_ids': implied})
+        self.env['ir.model.access'].sudo().search([
+            ('group_id', '=', manager.id),
+        ]).unlink()
+        manager.sudo().write({'implied_ids': [(5, 0, 0)]})
+        manager.sudo().unlink()
 

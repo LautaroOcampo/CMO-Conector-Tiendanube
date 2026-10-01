@@ -30,7 +30,7 @@ Features:
     'support': "lautaro@galarreta.co",
 
     'category': 'Sales',
-    'version': '19.0.1.0.39',
+    'version': '19.0.1.0.47',
 
     'depends': ['base', 'product', 'sale', 'stock', 'mail', 'account'],
 
@@ -41,6 +41,7 @@ Features:
     'data': [
         'security/tn_security.xml',
         'security/ir.model.access.csv',
+        'security/tn_retire_manager.xml',
         'views/tn_config_views.xml',
         'views/tn_oauth_tenant_views.xml',
         'views/tn_publication_views.xml',
@@ -53,7 +54,6 @@ Features:
         'views/report_invoice_templates.xml',
         'views/res_config_settings_views.xml',
         'views/tn_create_publication_wizard_views.xml',
-        'data/tn_oauth_parameters.xml',
         'data/cron_order_sync.xml',
         'data/cron_product_import.xml',
     ],
@@ -64,4 +64,5 @@ Features:
     'application': True,
     'auto_install': False,
     'license': 'LGPL-3',
+    'post_init_hook': 'post_init_hook',
 }

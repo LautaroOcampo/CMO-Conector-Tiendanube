@@ -171,8 +171,9 @@
     <!-- Menu Item -->
     <menuitem id="menu_tn_sale_order"
               name="Ventas"
-              parent="tiendanube_connector.menu_tn_publication_root"
+              parent="menu_tn_publication_root"
               action="action_tn_sale_order"
+              groups="group_tn_user"
               sequence="20"/>
 
 </odoo>

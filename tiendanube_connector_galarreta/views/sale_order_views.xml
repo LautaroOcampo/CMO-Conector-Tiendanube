@@ -9,14 +9,14 @@
             <xpath expr="//div[@name='button_box']" position="inside">
                 <button class="oe_stat_button" type="object" name="action_view_tn_sale_order"
                         icon="fa-shopping-bag" invisible="not tn_sale_order_id"
-                        groups="tiendanube_connector.group_tn_user">
+                        groups="group_tn_user">
                     <span class="o_stat_text">TiendaNube</span>
                 </button>
             </xpath>
             <xpath expr="//notebook" position="inside">
                 <page string="TiendaNube" name="tn_sale_page"
                       invisible="not tn_sale_order_id"
-                      groups="tiendanube_connector.group_tn_user">
+                      groups="group_tn_user">
                     <group>
                         <group string="Venta vinculada">
                             <field name="tn_sale_order_id" string="Venta TN" readonly="1"/>

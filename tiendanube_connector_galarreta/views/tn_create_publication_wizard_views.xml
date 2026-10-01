@@ -90,7 +90,7 @@
                                     <p><strong>Datos que se copiarán a la publicación:</strong></p>
                                     <ul>
                                         <li><strong>Nombre:</strong> Nombre del producto (product.template.name)</li>
-                                        <li><strong>Precio:</strong> Precio de lista del producto (list_price) al crear; luego se gestiona desde la publicación</li>
+                                        <li><strong>Precio:</strong> no se copia. El precio de la publicación queda en la publicación y el del producto en el producto</li>
                                         <li><strong>Stock:</strong> Stock disponible en el almacén configurado</li>
                                         <li><strong>Imagen:</strong> Imagen principal del producto (image_1920)</li>
                                         <li><strong>SKU:</strong> Código de producto (default_code)</li>

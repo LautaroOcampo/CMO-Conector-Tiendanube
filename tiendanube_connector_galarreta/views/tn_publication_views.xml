@@ -262,19 +262,21 @@
     <menuitem id="menu_tn_publication_root"
               name="TiendaNube"
               sequence="100"
-              web_icon="tiendanube_connector,static/description/icon.png"
-              groups="tiendanube_connector.group_tn_user"/>
+              web_icon="tiendanube_connector_galarreta,static/description/icon.png"
+              groups="group_tn_user"/>
 
     <menuitem id="menu_tn_config"
               name="Configuración"
               parent="menu_tn_publication_root"
               action="action_tn_config"
+              groups="group_tn_admin"
               sequence="5"/>
 
     <menuitem id="menu_tn_publication"
               name="Publicaciones"
               parent="menu_tn_publication_root"
               action="action_tn_publication"
+              groups="group_tn_user"
               sequence="10"/>
 
     <!-- Vista heredada de product.template para agregar pestaña TiendaNube -->
@@ -285,7 +287,7 @@
         <field name="arch" type="xml">
             <!-- Pestaña TiendaNube dentro del notebook -->
             <xpath expr="//notebook" position="inside">
-                <page string="TiendaNube" name="tiendanube" groups="tiendanube_connector.group_tn_user">
+                <page string="TiendaNube" name="tiendanube" groups="group_tn_user">
                     <group string="Publicaciones TiendaNube">
                         <field name="tn_publication_ids" 
                                context="{'default_odoo_product_id': id}"

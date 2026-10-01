@@ -41,6 +41,96 @@ def _oauth_html(title, heading, body, ok=True):
     ) % (html.escape(title), color, html.escape(heading), body)
 
 
+def _clear_tn_oauth_session():
+    request.session.pop('tn_code_verifier', None)
+    request.session.pop('tn_config_id', None)
+    request.session.pop('tn_oauth_state', None)
+
+
+def complete_local_tn_oauth_callback(code, state_param):
+    """Termina OAuth directo en esta base. None si no hay sesión local de autorización."""
+    expected_state = request.session.get('tn_oauth_state')
+    config_id = request.session.get('tn_config_id')
+    code_verifier = request.session.get('tn_code_verifier')
+
+    if not expected_state and not config_id:
+        return None
+
+    if expected_state and state_param:
+        if not _tn_oauth_state_matches(state_param, expected_state):
+            _logger.warning('Callback OAuth TN local: state inválido (posible CSRF)')
+            _clear_tn_oauth_session()
+            return _oauth_html(
+                'Error',
+                'Error',
+                html.escape(
+                    'Validacion de seguridad fallida (parametro state). '
+                    'Inicie la autorizacion de nuevo desde Odoo.'
+                ),
+                ok=False,
+            )
+
+    if not config_id:
+        return None
+
+    config = request.env['tn.config'].sudo().browse(int(config_id))
+    if not config.exists():
+        _clear_tn_oauth_session()
+        return _oauth_html(
+            'Error',
+            'Error',
+            html.escape('No se encontro ninguna configuracion de TiendaNube en Odoo.'),
+            ok=False,
+        )
+
+    cid, csec = config._oauth_app_credentials()
+    if not cid or not csec:
+        _clear_tn_oauth_session()
+        return _oauth_html(
+            'Error',
+            'Error',
+            html.escape('La configuracion no tiene Client ID / Client Secret cargados.'),
+            ok=False,
+        )
+    config._ensure_hub_app_credentials_on_config()
+
+    ctrl = TiendaNubeOAuthController()
+    try:
+        response = ctrl._exchange_code(
+            cid,
+            csec,
+            code,
+            code_verifier=code_verifier,
+            redirect_uri=ctrl._callback_uri() if config._oauth_this_is_hub() else None,
+        )
+        if response.status_code == 200:
+            ctrl._apply_tokens(config, response.json())
+            _clear_tn_oauth_session()
+            _logger.info('Tokens TN locales OK (store_id=%s)', config.store_id)
+            return _oauth_html(
+                'Autorizacion exitosa',
+                'Autorizacion exitosa',
+                'La tienda quedo conectada con Odoo. Podes cerrar esta ventana.',
+            )
+        _logger.error('Error al obtener tokens TN: %s - %s', response.status_code, response.text)
+        _clear_tn_oauth_session()
+        return _oauth_html(
+            'Error',
+            'Error',
+            html.escape('Error %s: %s' % (response.status_code, response.text)),
+            ok=False,
+        )
+    except Exception as e:
+        _logger.exception('Error en callback OAuth TN local: %s', e)
+        _clear_tn_oauth_session()
+        return _oauth_html(
+            'Error',
+            'Error',
+            html.escape('Error al procesar la autorizacion: %s' % e),
+            ok=False,
+        )
+
+
 class TiendaNubeOAuthController(http.Controller):
     """Controlador para manejar el flujo OAuth de TiendaNube (directo y vía hub)."""
 
@@ -171,13 +261,14 @@ class TiendaNubeOAuthController(http.Controller):
             if use_hub:
                 return self._redirect_tenant_to_hub(sec)
 
-            has_local_app = bool((sec.client_id or '').strip() and (sec.client_secret or '').strip())
-            if not has_local_app:
+            cid, csec = sec._oauth_app_credentials()
+            if not cid or not csec:
                 return self._page_error(
-                    'Debe configurar Client ID y Client Secret (modo directo), '
+                    'Debe configurar Client ID y Client Secret (modo directo o hub), '
                     'o los parámetros oauth_hub_url / oauth_shared_secret (modo hub).',
                     title='Error de Configuración',
                 )
+            sec._ensure_hub_app_credentials_on_config()
 
             code_verifier = secrets.token_urlsafe(32)
             oauth_state = secrets.token_urlsafe(32)
@@ -187,7 +278,7 @@ class TiendaNubeOAuthController(http.Controller):
 
             # Directo: misma redirect URI que siempre (host actual).
             redirect_uri = request.httprequest.host_url.rstrip('/') + '/tiendanube/oauth/callback'
-            return self._redirect_to_tiendanube(sec.client_id, oauth_state, redirect_uri)
+            return self._redirect_to_tiendanube(cid, oauth_state, redirect_uri)
 
         except Exception as e:
             _logger.exception('Error al iniciar autorización OAuth: %s', e)
@@ -196,6 +287,11 @@ class TiendaNubeOAuthController(http.Controller):
     @http.route('/tiendanube/oauth/hub/start', type='http', auth='public', csrf=False, website=True)
     def hub_start(self, **kwargs):
         """El cliente llega acá firmado; el hub redirige a TiendaNube con su callback fijo."""
+        if 'tn.oauth.hub.config' in request.env:
+            from odoo.addons.tiendanube_oauth_hub.controllers.tn_oauth_hub import (
+                TiendaNubeOAuthHubController,
+            )
+            return TiendaNubeOAuthHubController().hub_start(**kwargs)
         tenant_code = (kwargs.get('tenant') or '').strip()
         return_url = (kwargs.get('return_url') or '').rstrip('/')
         ts = kwargs.get('ts')
@@ -242,97 +338,63 @@ class TiendaNubeOAuthController(http.Controller):
 
     @http.route('/tiendanube/oauth/callback', type='http', auth='public', csrf=False, website=True)
     def callback(self, **kwargs):
-        """Callback único de TiendaNube: flujo hub (pending) o directo (sesión)."""
+        """Callback único: si el hub está instalado, él decide cliente vs local."""
+        if 'tn.oauth.hub.config' in request.env:
+            from odoo.addons.tiendanube_oauth_hub.controllers.tn_oauth_hub import (
+                TiendaNubeOAuthHubController,
+            )
+            return TiendaNubeOAuthHubController().callback(**kwargs)
+
         code = kwargs.get('code')
         error = kwargs.get('error')
         state_param = kwargs.get('state')
         config_id = request.session.get('tn_config_id')
-        code_verifier = request.session.get('tn_code_verifier')
         expected_state = request.session.get('tn_oauth_state')
-
-        def _clear_oauth_session():
-            request.session.pop('tn_code_verifier', None)
-            request.session.pop('tn_config_id', None)
-            request.session.pop('tn_oauth_state', None)
 
         if error:
             _logger.error('Error en callback OAuth: %s', error)
-            _clear_oauth_session()
+            _clear_tn_oauth_session()
             return self._page_error('Error de autorización: %s' % error)
 
         if not code:
-            _clear_oauth_session()
+            _clear_tn_oauth_session()
             return self._page_error("Falta el parametro 'code' en la respuesta de TiendaNube.")
 
         pending = request.env['tn.oauth.pending'].sudo()._get_valid(state_param)
         if pending:
-            return self._callback_hub(pending, code, _clear_oauth_session)
+            return self._callback_hub(pending, code, _clear_tn_oauth_session)
 
-        if expected_state and state_param:
-            if not _tn_oauth_state_matches(state_param, expected_state):
-                _logger.warning('Callback OAuth: state invalido (posible CSRF)')
-                _clear_oauth_session()
-                return self._page_error(
-                    'Validacion de seguridad fallida (parametro state). '
-                    'Inicie la autorizacion de nuevo desde Odoo.'
-                )
+        local = complete_local_tn_oauth_callback(code, state_param)
+        if local is not None:
+            return local
 
-        if config_id:
-            config = request.env['tn.config'].sudo().browse(int(config_id))
-        else:
-            config = request.env['tn.config'].sudo().get_config()
-
-        if not config or not config.exists():
-            _clear_oauth_session()
-            return self._page_error('No se encontro ninguna configuracion de TiendaNube en Odoo.')
-
-        # Instalación desde el admin de TN sin state: no en el hub (evitar tokens en la base central).
-        if not expected_state and config._oauth_this_is_hub():
-            _clear_oauth_session()
+        _clear_tn_oauth_session()
+        if not expected_state and not config_id:
             return self._page_error(
-                'Esta base es el hub OAuth. Conectá TiendaNube desde el Odoo de la tienda.'
+                'No hay una autorización en curso. Conectá TiendaNube desde Odoo '
+                '(botón "Autorizar aplicación").'
             )
-
-        if not config.client_id or not config.client_secret:
-            _clear_oauth_session()
-            return self._page_error('La configuracion no tiene Client ID / Client Secret cargados.')
-
-        try:
-            response = self._exchange_code(
-                config.client_id,
-                config.client_secret,
-                code,
-                code_verifier=code_verifier,
-            )
-            if response.status_code == 200:
-                self._apply_tokens(config, response.json())
-                _clear_oauth_session()
-                _logger.info('Tokens obtenidos correctamente (store_id=%s)', config.store_id)
-                return _oauth_html(
-                    'Autorizacion exitosa',
-                    'Autorizacion exitosa',
-                    'La tienda quedo conectada con Odoo. Podes cerrar esta ventana.',
-                )
-            _logger.error('Error al obtener tokens: %s - %s', response.status_code, response.text)
-            _clear_oauth_session()
-            return self._page_error('Error %s: %s' % (response.status_code, response.text))
-        except Exception as e:
-            _logger.exception('Error en callback OAuth: %s', e)
-            _clear_oauth_session()
-            return self._page_error('Error al procesar la autorizacion: %s' % e)
+        return self._page_error('No se encontro ninguna configuracion de TiendaNube en Odoo.')
 
     def _callback_hub(self, pending, code, clear_session):
         tenant = pending.tenant_id
-        hub_config = request.env['tn.config'].sudo().get_config()
-        if not hub_config or not hub_config.client_id or not hub_config.client_secret:
-            pending.write({'consumed': True})
-            clear_session()
-            return self._page_error('El hub no tiene Client ID / Client Secret.')
+        hub_config = None
+        if 'tn.oauth.hub.config' in request.env:
+            hub_config = request.env['tn.oauth.hub.config'].sudo().get_config()
+        if hub_config and hub_config.client_id and hub_config.client_secret:
+            client_id, client_secret = hub_config.client_id, hub_config.client_secret
+        else:
+            local_cfg = request.env['tn.config'].sudo().get_config()
+            if not local_cfg or not local_cfg.client_id or not local_cfg.client_secret:
+                pending.write({'consumed': True})
+                clear_session()
+                return self._page_error('El hub no tiene Client ID / Client Secret.')
+            client_id, client_secret = local_cfg.client_id, local_cfg.client_secret
 
         try:
             response = self._exchange_code(
-                hub_config.client_id,
-                hub_config.client_secret,
+                client_id,
+                client_secret,
                 code,
                 redirect_uri=self._callback_uri(),
             )

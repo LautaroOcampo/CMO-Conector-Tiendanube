@@ -63,7 +63,8 @@
     <!-- Menú bajo TiendaNube -->
     <menuitem id="menu_tn_webhook_notification"
               name="Notificaciones Webhook"
-              parent="tiendanube_connector.menu_tn_publication_root"
+              parent="menu_tn_publication_root"
               action="action_tn_webhook_notification"
+              groups="group_tn_admin"
               sequence="25"/>
 </odoo>

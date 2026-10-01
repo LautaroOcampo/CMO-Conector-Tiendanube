@@ -313,6 +313,14 @@ class TNPublication(models.Model):
         
         # Sincronizar variantes
         if product.product_variant_ids:
+            # Conservar el precio propio de la publicación. No copiar list_price.
+            previous_prices = []
+            for old in self.variant_ids:
+                previous_prices.append({
+                    'odoo_id': old.odoo_variant_id.id,
+                    'sku': (old.sku or '').strip(),
+                    'price': old.price or 0.0,
+                })
             # Eliminar variantes existentes
             self.variant_ids.unlink()
             
@@ -372,11 +380,21 @@ class TNPublication(models.Model):
                 else:
                     variant_stock = variant.qty_available or 0.0
                 
+                sku = variant.default_code or ''
+                kept_price = 0.0
+                sku_key = sku.strip()
+                for old in previous_prices:
+                    if old['odoo_id'] and old['odoo_id'] == variant.id:
+                        kept_price = old['price']
+                        break
+                    if sku_key and old['sku'] and old['sku'] == sku_key:
+                        kept_price = old['price']
+                        break
                 self.env['tn.publication.variant'].create({
                     'publication_id': self.id,
                     'name': variant_name,
-                    'sku': variant.default_code or '',
-                    'price': variant.list_price,
+                    'sku': sku,
+                    'price': kept_price,
                     'stock': variant_stock,
                     'weight': variant_weight,
                     'width': variant_width,
@@ -1568,8 +1586,6 @@ class TNPublicationVariant(models.Model):
         # Sincronizar otros campos desde la variante de Odoo
         if not self.sku:
             self.sku = variant.default_code or ''
-        if not self.price:
-            self.price = variant.list_price or 0.0
         
         # Sincronizar dimensiones si están disponibles
         if hasattr(variant, 'weight') and variant.weight:
