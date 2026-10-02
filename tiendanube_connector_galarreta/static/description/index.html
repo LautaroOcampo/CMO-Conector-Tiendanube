@@ -1,181 +1,304 @@
-<section class="oe_container">
-    <div class="oe_row oe_spaced" style="text-align:center; padding: 40px 0 20px;">
-        <img src="icon.png" alt="TiendaNube Connector" style="max-width:96px; border-radius:16px; margin-bottom:16px;"/>
-        <h1 style="font-size:2.2em; font-weight:800; margin:0 0 8px;">TiendaNube Connector for Odoo</h1>
-        <h2 style="font-size:1.2em; font-weight:400; color:#666; margin:0 0 24px;">The complete bridge between Odoo and your TiendaNube store</h2>
-        <div style="display:inline-flex; gap:12px; flex-wrap:wrap; justify-content:center;">
-            <span style="background:#f0f4ff; color:#3b5bdb; border-radius:20px; padding:6px 16px; font-size:0.9em; font-weight:600;">✅ Odoo 19 Ready</span>
-            <span style="background:#f0fff4; color:#2f9e44; border-radius:20px; padding:6px 16px; font-size:0.9em; font-weight:600;">🇦🇷 Built for Latin America</span>
-            <span style="background:#fff9f0; color:#e67700; border-radius:20px; padding:6px 16px; font-size:0.9em; font-weight:600;">⚡ Real-time webhooks</span>
+<section style="background-color:#ffffff; padding:48px 12px 24px;">
+    <h2 style="font-size:46px; line-height:1.05; font-weight:800; color:#111827; margin:0 0 28px; text-align:center;">Conector TiendaNube para Odoo</h2>
+    <div class="row" style="margin-bottom:36px;">
+        <div class="col-6 col-lg-3" style="margin-bottom:12px;">
+            <div style="background-color:#fd4f32; border-radius:16px; padding:22px 10px; text-align:center; height:100%;">
+                <div style="font-size:28px; font-weight:700; color:#ffffff; line-height:1; margin-bottom:8px;">Odoo 19</div>
+                <div style="font-size:16px; line-height:1.2; color:#ffffff; font-weight:600;">Listo para instalar</div>
+            </div>
+        </div>
+        <div class="col-6 col-lg-3" style="margin-bottom:12px;">
+            <div style="background-color:#fd4f32; border-radius:16px; padding:22px 10px; text-align:center; height:100%;">
+                <div style="font-size:28px; font-weight:700; color:#ffffff; line-height:1; margin-bottom:8px;">OAuth</div>
+                <div style="font-size:16px; line-height:1.2; color:#ffffff; font-weight:600;">Autorizacion 2.0</div>
+            </div>
+        </div>
+        <div class="col-6 col-lg-3" style="margin-bottom:12px;">
+            <div style="background-color:#fd4f32; border-radius:16px; padding:22px 10px; text-align:center; height:100%;">
+                <div style="font-size:26px; font-weight:700; color:#ffffff; line-height:1; margin-bottom:8px;">Webhook</div>
+                <div style="font-size:16px; line-height:1.2; color:#ffffff; font-weight:600;">Ventas en tiempo real</div>
+            </div>
+        </div>
+        <div class="col-6 col-lg-3" style="margin-bottom:12px;">
+            <div style="background-color:#fd4f32; border-radius:16px; padding:22px 10px; text-align:center; height:100%;">
+                <div style="font-size:28px; font-weight:700; color:#ffffff; line-height:1; margin-bottom:8px;">Stock</div>
+                <div style="font-size:16px; line-height:1.2; color:#ffffff; font-weight:600;">Pausa por minimo</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6" style="margin-bottom:24px;">
+            <p style="font-size:24px; line-height:1.35; font-weight:700; color:#111827; margin:0 0 12px;">Lleva la operacion de TiendaNube a Odoo</p>
+            <p style="font-size:17px; line-height:1.7; color:#475569; margin:0 0 18px;">Publicaciones, stock, precios y pedidos en la misma base, sin cargar ventas a mano.</p>
+            <div class="row">
+                <div class="col-sm-6" style="margin-bottom:10px;">
+                    <div style="border:1px solid #f0d5cf; background-color:#ffffff; color:#334155; font-size:15px; line-height:1.45; border-radius:14px; padding:14px; height:100%;">
+                        <span style="display:inline-block; width:36px; height:36px; line-height:36px; text-align:center; border-radius:10px; background-color:#fd4f32; color:#ffffff; margin-right:8px;"><i class="fa fa-check"></i></span>
+                        Publicaciones, precios y stock desde Odoo
+                    </div>
+                </div>
+                <div class="col-sm-6" style="margin-bottom:10px;">
+                    <div style="border:1px solid #f0d5cf; background-color:#ffffff; color:#334155; font-size:15px; line-height:1.45; border-radius:14px; padding:14px; height:100%;">
+                        <span style="display:inline-block; width:36px; height:36px; line-height:36px; text-align:center; border-radius:10px; background-color:#fd4f32; color:#ffffff; margin-right:8px;"><i class="fa fa-check"></i></span>
+                        Cada venta genera pedido, entrega y factura
+                    </div>
+                </div>
+                <div class="col-sm-6" style="margin-bottom:10px;">
+                    <div style="border:1px solid #f0d5cf; background-color:#ffffff; color:#334155; font-size:15px; line-height:1.45; border-radius:14px; padding:14px; height:100%;">
+                        <span style="display:inline-block; width:36px; height:36px; line-height:36px; text-align:center; border-radius:10px; background-color:#fd4f32; color:#ffffff; margin-right:8px;"><i class="fa fa-check"></i></span>
+                        Webhook al instante y polling de respaldo
+                    </div>
+                </div>
+                <div class="col-sm-6" style="margin-bottom:10px;">
+                    <div style="border:1px solid #f0d5cf; background-color:#ffffff; color:#334155; font-size:15px; line-height:1.45; border-radius:14px; padding:14px; height:100%;">
+                        <span style="display:inline-block; width:36px; height:36px; line-height:36px; text-align:center; border-radius:10px; background-color:#fd4f32; color:#ffffff; margin-right:8px;"><i class="fa fa-check"></i></span>
+                        Tokens solo en tu base
+                    </div>
+                </div>
+            </div>
+            <div style="background-color:#fd4f32; color:#ffffff; border-radius:16px; padding:22px 24px; margin-top:8px;">
+                <div style="font-size:22px; font-weight:800; line-height:1.25;">Servicio externo</div>
+                <div style="font-size:15px; line-height:1.5; margin-top:6px;">Hace falta una tienda activa y una aplicacion de socio (Client ID, Client Secret y Store ID). La autorizacion es OAuth 2.0.</div>
+                <a href="mailto:lautaro@galarreta.co" style="display:inline-block; background-color:#ffffff; color:#fd4f32; border-radius:14px; padding:10px 22px; font-weight:700; text-decoration:none; margin-top:16px;">Escribir a soporte</a>
+            </div>
+        </div>
+        <div class="col-lg-6" style="margin-bottom:24px;">
+            <div style="background-color:#fd4f32; border-radius:34px; padding:10px;">
+                <div style="background-color:#ffffff; border-radius:28px; padding:18px;">
+                    <div class="row">
+                        <div class="col-6" style="margin-bottom:12px;">
+                            <div style="border:1px solid #f0d5cf; background-color:#ffffff; border-radius:16px; padding:16px; height:100%;">
+                                <div style="color:#fd4f32; font-size:22px; margin-bottom:8px;"><i class="fa fa-shopping-cart"></i></div>
+                                <div style="font-size:16px; font-weight:700; color:#111827;">Ventas</div>
+                                <div style="font-size:13px; color:#64748b; line-height:1.45; margin-top:4px;">Webhook, polling y sin duplicados</div>
+                            </div>
+                        </div>
+                        <div class="col-6" style="margin-bottom:12px;">
+                            <div style="border:1px solid #f0d5cf; background-color:#ffffff; border-radius:16px; padding:16px; height:100%;">
+                                <div style="color:#fd4f32; font-size:22px; margin-bottom:8px;"><i class="fa fa-archive"></i></div>
+                                <div style="font-size:16px; font-weight:700; color:#111827;">Stock</div>
+                                <div style="font-size:13px; color:#64748b; line-height:1.45; margin-top:4px;">Sincronizacion y pausa por minimo</div>
+                            </div>
+                        </div>
+                        <div class="col-6" style="margin-bottom:12px;">
+                            <div style="border:1px solid #f0d5cf; background-color:#ffffff; border-radius:16px; padding:16px; height:100%;">
+                                <div style="color:#fd4f32; font-size:22px; margin-bottom:8px;"><i class="fa fa-cubes"></i></div>
+                                <div style="font-size:16px; font-weight:700; color:#111827;">Catalogo</div>
+                                <div style="font-size:13px; color:#64748b; line-height:1.45; margin-top:4px;">Publicaciones, variantes e imagenes</div>
+                            </div>
+                        </div>
+                        <div class="col-6" style="margin-bottom:12px;">
+                            <div style="border:1px solid #f0d5cf; background-color:#ffffff; border-radius:16px; padding:16px; height:100%;">
+                                <div style="color:#fd4f32; font-size:22px; margin-bottom:8px;"><i class="fa fa-file-text-o"></i></div>
+                                <div style="font-size:16px; font-weight:700; color:#111827;">Facturacion</div>
+                                <div style="font-size:13px; color:#64748b; line-height:1.45; margin-top:4px;">Pedido, entrega y factura automatica</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background-color:#fd4f32; color:#ffffff; border-radius:16px; padding:22px 20px; margin-top:8px;">
+                        <div style="font-size:12px; font-weight:700; text-transform:uppercase;">Operacion</div>
+                        <div style="font-size:22px; font-weight:800; line-height:1.25; margin-top:6px;">TiendaNube y Odoo en la misma base</div>
+                        <div style="font-size:15px; line-height:1.5; margin-top:8px;">Publicaciones, stock, precios y ventas, sin salir de Odoo.</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<section class="oe_container oe_dark">
-    <div class="oe_row oe_spaced" style="padding: 32px 0;">
-        <h3 class="oe_slogan" style="font-size:1.5em; font-weight:700; margin-bottom:8px;">External service required</h3>
-        <p class="text-center" style="max-width:680px; margin:0 auto; color:#555; line-height:1.7;">
-            This module integrates Odoo with the <strong>TiendaNube (Nuvemshop) API</strong>.
-            An active TiendaNube store and a partner application (Client ID / Client Secret) are required.
-            Authorization is handled via OAuth 2.0 — your credentials are stored only in your own Odoo database.
-        </p>
-    </div>
-</section>
-
-<section class="oe_container">
-    <div class="oe_row oe_spaced" style="padding: 40px 0 24px;">
-        <h3 class="oe_slogan" style="font-size:1.6em; font-weight:700; text-align:center; margin-bottom:40px;">
-            Why are TiendaNube &amp; Odoo<br/>better together — if they are connected?
-        </h3>
-
-        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:24px;">
-
-            <div style="background:#f8f9ff; border-radius:12px; padding:28px 24px;">
-                <div style="font-size:2em; margin-bottom:12px;">🏪</div>
-                <h4 style="font-weight:700; margin:0 0 8px;">Manage your store from Odoo</h4>
-                <p style="color:#666; font-size:0.93em; line-height:1.6; margin:0;">Publish products, update prices and control stock for your TiendaNube store without leaving Odoo. One source of truth for your entire operation.</p>
+<section style="background-color:#ffffff; padding:12px 12px 36px;">
+    <div style="border:1px solid #f0d5cf; background-color:#ffffff; border-radius:18px; padding:32px 28px;">
+        <div style="font-size:13px; font-weight:700; color:#fd4f32; text-transform:uppercase;">Pasos</div>
+        <h2 style="font-size:34px; font-weight:700; color:#111827; margin:8px 0 6px;">Como funciona</h2>
+        <div style="width:48px; height:4px; background-color:#fd4f32; border-radius:4px; margin-bottom:22px;"></div>
+        <div class="row">
+            <div class="col-md-4" style="margin-bottom:14px;">
+                <div style="background-color:#ffffff; border:1px solid #f0d5cf; border-radius:14px; padding:18px; height:100%;">
+                    <div style="width:42px; height:42px; line-height:42px; text-align:center; border-radius:10px; background-color:#fd4f32; color:#ffffff; font-weight:800; font-size:18px; margin-bottom:12px;">1</div>
+                    <div style="font-size:16px; font-weight:700; color:#111827;">Instalar y abrir la configuracion</div>
+                    <p style="color:#64748b; line-height:1.6; margin:8px 0 0; font-size:14px;">Aparece un menu propio dentro de Ventas.</p>
+                </div>
             </div>
-
-            <div style="background:#f8f9ff; border-radius:12px; padding:28px 24px;">
-                <div style="font-size:2em; margin-bottom:12px;">📦</div>
-                <h4 style="font-weight:700; margin:0 0 8px;">Stock always in sync</h4>
-                <p style="color:#666; font-size:0.93em; line-height:1.6; margin:0;">Every sale, delivery or inventory adjustment in Odoo updates your TiendaNube listings automatically. Never oversell again.</p>
+            <div class="col-md-4" style="margin-bottom:14px;">
+                <div style="background-color:#ffffff; border:1px solid #f0d5cf; border-radius:14px; padding:18px; height:100%;">
+                    <div style="width:42px; height:42px; line-height:42px; text-align:center; border-radius:10px; background-color:#fd4f32; color:#ffffff; font-weight:800; font-size:18px; margin-bottom:12px;">2</div>
+                    <div style="font-size:16px; font-weight:700; color:#111827;">Cargar Client ID, Secret y Store ID</div>
+                    <p style="color:#64748b; line-height:1.6; margin:8px 0 0; font-size:14px;">Salen de tu aplicacion en el panel de socios de TiendaNube.</p>
+                </div>
             </div>
-
-            <div style="background:#f8f9ff; border-radius:12px; padding:28px 24px;">
-                <div style="font-size:2em; margin-bottom:12px;">🛒</div>
-                <h4 style="font-weight:700; margin:0 0 8px;">Orders flow automatically</h4>
-                <p style="color:#666; font-size:0.93em; line-height:1.6; margin:0;">TiendaNube orders arrive in Odoo in real time via webhooks. Customer records, delivery orders and invoices are created automatically.</p>
+            <div class="col-md-4" style="margin-bottom:14px;">
+                <div style="background-color:#ffffff; border:1px solid #f0d5cf; border-radius:14px; padding:18px; height:100%;">
+                    <div style="width:42px; height:42px; line-height:42px; text-align:center; border-radius:10px; background-color:#fd4f32; color:#ffffff; font-weight:800; font-size:18px; margin-bottom:12px;">3</div>
+                    <div style="font-size:16px; font-weight:700; color:#111827;">Autorizar con OAuth 2.0</div>
+                    <p style="color:#64748b; line-height:1.6; margin:8px 0 0; font-size:14px;">Los tokens se guardan en tu base y se renuevan solos.</p>
+                </div>
             </div>
-
+            <div class="col-md-6" style="margin-bottom:14px;">
+                <div style="background-color:#ffffff; border:1px solid #f0d5cf; border-radius:14px; padding:18px; height:100%;">
+                    <div style="width:42px; height:42px; line-height:42px; text-align:center; border-radius:10px; background-color:#fd4f32; color:#ffffff; font-weight:800; font-size:18px; margin-bottom:12px;">4</div>
+                    <div style="font-size:16px; font-weight:700; color:#111827;">Importar publicaciones y vincular por SKU</div>
+                    <p style="color:#64748b; line-height:1.6; margin:8px 0 0; font-size:14px;">Matching automatico por SKU o asignacion manual, con variantes e imagenes.</p>
+                </div>
+            </div>
+            <div class="col-md-6" style="margin-bottom:14px;">
+                <div style="background-color:#ffffff; border:1px solid #f0d5cf; border-radius:14px; padding:18px; height:100%;">
+                    <div style="width:42px; height:42px; line-height:42px; text-align:center; border-radius:10px; background-color:#fd4f32; color:#ffffff; font-weight:800; font-size:18px; margin-bottom:12px;">5</div>
+                    <div style="font-size:16px; font-weight:700; color:#111827;">Activar webhooks y el polling</div>
+                    <p style="color:#64748b; line-height:1.6; margin:8px 0 0; font-size:14px;">Cada venta genera pedido, entrega y factura. El polling cubre lo que el webhook no pudo.</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<section class="oe_container oe_dark">
-    <div class="oe_row oe_spaced" style="padding: 40px 0;">
-        <h3 class="oe_slogan" style="font-size:1.5em; font-weight:700; text-align:center; margin-bottom:36px;">How it works</h3>
-
-        <div style="display:flex; gap:0; counter-reset: steps; max-width:700px; margin:0 auto; flex-direction:column;">
-
-            <div style="display:flex; align-items:flex-start; gap:20px; margin-bottom:24px;">
-                <div style="min-width:36px; height:36px; background:#3b5bdb; color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1em;">1</div>
-                <div>
-                    <strong>Install and open TiendaNube Configuration in Odoo</strong>
-                    <p style="color:#666; margin:4px 0 0; font-size:0.92em;">A new TiendaNube menu appears in the Sales app.</p>
+<section style="background-color:#ffffff; padding:0 12px 36px;">
+    <div style="border:1px solid #f0d5cf; background-color:#ffffff; border-radius:18px; padding:32px 28px;">
+        <div style="font-size:13px; font-weight:700; color:#fd4f32; text-transform:uppercase;">Cobertura</div>
+        <h2 style="font-size:34px; font-weight:700; color:#111827; margin:8px 0 6px;">Todo lo que necesitas para operar desde Odoo</h2>
+        <div style="border-left:4px solid #fd4f32; padding:4px 0 4px 14px; margin:12px 0 22px;">
+            <div style="font-size:15px; font-weight:700; color:#fd4f32; text-transform:uppercase;">Publicaciones, stock, precios y ventas en un solo lugar</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4" style="margin-bottom:16px;">
+                <div style="border:1px solid #f0f0f0; border-radius:12px; padding:26px; height:100%;">
+                    <div style="width:50px; height:50px; line-height:50px; text-align:center; background-color:#fd4f32; color:#ffffff; border-radius:50%; margin-bottom:16px;"><i class="fa fa-cubes" style="font-size:22px;"></i></div>
+                    <h3 style="font-size:18px; font-weight:700; color:#1a1a1a; margin:0 0 8px;">Publicaciones</h3>
+                    <p style="font-size:15px; color:#666666; line-height:1.6; margin:0 0 14px;">Importa, publica y vincula las publicaciones con los productos de Odoo.</p>
+                    <div style="font-size:15px; color:#444444; margin-bottom:8px;"><i class="fa fa-check" style="color:#fd4f32; margin-right:8px;"></i>Importar y administrar publicaciones</div>
+                    <div style="font-size:15px; color:#444444; margin-bottom:8px;"><i class="fa fa-check" style="color:#fd4f32; margin-right:8px;"></i>Publicar productos de Odoo</div>
+                    <div style="font-size:15px; color:#444444;"><i class="fa fa-check" style="color:#fd4f32; margin-right:8px;"></i>Variantes, atributos e imagenes</div>
                 </div>
             </div>
-
-            <div style="display:flex; align-items:flex-start; gap:20px; margin-bottom:24px;">
-                <div style="min-width:36px; height:36px; background:#3b5bdb; color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1em;">2</div>
-                <div>
-                    <strong>Enter your Client ID and Client Secret</strong>
-                    <p style="color:#666; margin:4px 0 0; font-size:0.92em;">From your TiendaNube partner app at developers.tiendanube.com.</p>
+            <div class="col-md-4" style="margin-bottom:16px;">
+                <div style="border:1px solid #f0f0f0; border-radius:12px; padding:26px; height:100%;">
+                    <div style="width:50px; height:50px; line-height:50px; text-align:center; background-color:#fd4f32; color:#ffffff; border-radius:50%; margin-bottom:16px;"><i class="fa fa-tag" style="font-size:22px;"></i></div>
+                    <h3 style="font-size:18px; font-weight:700; color:#1a1a1a; margin:0 0 8px;">Precios y SKU</h3>
+                    <p style="font-size:15px; color:#666666; line-height:1.6; margin:0 0 14px;">El precio sale de la lista de Odoo y la publicacion queda atada al producto por SKU.</p>
+                    <div style="font-size:15px; color:#444444; margin-bottom:8px;"><i class="fa fa-check" style="color:#fd4f32; margin-right:8px;"></i>Sincronizar precios, manual o automatico</div>
+                    <div style="font-size:15px; color:#444444; margin-bottom:8px;"><i class="fa fa-check" style="color:#fd4f32; margin-right:8px;"></i>Vinculo automatico o manual por SKU</div>
+                    <div style="font-size:15px; color:#444444;"><i class="fa fa-check" style="color:#fd4f32; margin-right:8px;"></i>Producto de respaldo si el SKU no coincide</div>
                 </div>
             </div>
-
-            <div style="display:flex; align-items:flex-start; gap:20px; margin-bottom:24px;">
-                <div style="min-width:36px; height:36px; background:#3b5bdb; color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1em;">3</div>
-                <div>
-                    <strong>Click Authorize — one click, done</strong>
-                    <p style="color:#666; margin:4px 0 0; font-size:0.92em;">OAuth 2.0 handles the login flow. Tokens are refreshed automatically.</p>
+            <div class="col-md-4" style="margin-bottom:16px;">
+                <div style="border:1px solid #f0f0f0; border-radius:12px; padding:26px; height:100%;">
+                    <div style="width:50px; height:50px; line-height:50px; text-align:center; background-color:#fd4f32; color:#ffffff; border-radius:50%; margin-bottom:16px;"><i class="fa fa-archive" style="font-size:22px;"></i></div>
+                    <h3 style="font-size:18px; font-weight:700; color:#1a1a1a; margin:0 0 8px;">Stock</h3>
+                    <p style="font-size:15px; color:#666666; line-height:1.6; margin:0 0 14px;">El stock de Odoo se refleja en la publicacion, con pausa y reactivacion.</p>
+                    <div style="font-size:15px; color:#444444; margin-bottom:8px;"><i class="fa fa-check" style="color:#fd4f32; margin-right:8px;"></i>Sincronizacion en cada movimiento</div>
+                    <div style="font-size:15px; color:#444444; margin-bottom:8px;"><i class="fa fa-check" style="color:#fd4f32; margin-right:8px;"></i>Pausa automatica al llegar al minimo</div>
+                    <div style="font-size:15px; color:#444444;"><i class="fa fa-check" style="color:#fd4f32; margin-right:8px;"></i>Disponible o esperado, por almacen</div>
                 </div>
             </div>
-
-            <div style="display:flex; align-items:flex-start; gap:20px; margin-bottom:24px;">
-                <div style="min-width:36px; height:36px; background:#3b5bdb; color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1em;">4</div>
-                <div>
-                    <strong>Import your publications and link them to Odoo products</strong>
-                    <p style="color:#666; margin:4px 0 0; font-size:0.92em;">Auto-link by SKU or assign manually. Supports variants and attributes.</p>
+            <div class="col-md-4" style="margin-bottom:16px;">
+                <div style="border:1px solid #f0f0f0; border-radius:12px; padding:26px; height:100%;">
+                    <div style="width:50px; height:50px; line-height:50px; text-align:center; background-color:#fd4f32; color:#ffffff; border-radius:50%; margin-bottom:16px;"><i class="fa fa-shopping-cart" style="font-size:22px;"></i></div>
+                    <h3 style="font-size:18px; font-weight:700; color:#1a1a1a; margin:0 0 8px;">Ventas</h3>
+                    <p style="font-size:15px; color:#666666; line-height:1.6; margin:0 0 14px;">Los pedidos entran por webhook, con polling de respaldo y sin duplicados.</p>
+                    <div style="font-size:15px; color:#444444; margin-bottom:8px;"><i class="fa fa-check" style="color:#fd4f32; margin-right:8px;"></i>Importacion en tiempo real</div>
+                    <div style="font-size:15px; color:#444444; margin-bottom:8px;"><i class="fa fa-check" style="color:#fd4f32; margin-right:8px;"></i>Polling automatico de respaldo</div>
+                    <div style="font-size:15px; color:#444444;"><i class="fa fa-check" style="color:#fd4f32; margin-right:8px;"></i>Comprador, envio y costo de envio</div>
                 </div>
             </div>
-
-            <div style="display:flex; align-items:flex-start; gap:20px;">
-                <div style="min-width:36px; height:36px; background:#3b5bdb; color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1em;">5</div>
-                <div>
-                    <strong>Enable real-time order sync and you're live</strong>
-                    <p style="color:#666; margin:4px 0 0; font-size:0.92em;">Webhooks capture every new order the moment it's placed. Scheduled polling works as a backup.</p>
+            <div class="col-md-4" style="margin-bottom:16px;">
+                <div style="border:1px solid #f0f0f0; border-radius:12px; padding:26px; height:100%;">
+                    <div style="width:50px; height:50px; line-height:50px; text-align:center; background-color:#fd4f32; color:#ffffff; border-radius:50%; margin-bottom:16px;"><i class="fa fa-file-text-o" style="font-size:22px;"></i></div>
+                    <h3 style="font-size:18px; font-weight:700; color:#1a1a1a; margin:0 0 8px;">Facturacion</h3>
+                    <p style="font-size:15px; color:#666666; line-height:1.6; margin:0 0 14px;">La venta puede crear el pedido, la entrega y la factura sin intervencion.</p>
+                    <div style="font-size:15px; color:#444444; margin-bottom:8px;"><i class="fa fa-check" style="color:#fd4f32; margin-right:8px;"></i>Pedido, entrega y factura automaticos</div>
+                    <div style="font-size:15px; color:#444444; margin-bottom:8px;"><i class="fa fa-check" style="color:#fd4f32; margin-right:8px;"></i>Diario, impuesto y cuenta de ingresos</div>
+                    <div style="font-size:15px; color:#444444;"><i class="fa fa-check" style="color:#fd4f32; margin-right:8px;"></i>Nombre de TiendaNube en el PDF</div>
                 </div>
             </div>
-
+            <div class="col-md-4" style="margin-bottom:16px;">
+                <div style="border:1px solid #f0f0f0; border-radius:12px; padding:26px; height:100%;">
+                    <div style="width:50px; height:50px; line-height:50px; text-align:center; background-color:#fd4f32; color:#ffffff; border-radius:50%; margin-bottom:16px;"><i class="fa fa-users" style="font-size:22px;"></i></div>
+                    <h3 style="font-size:18px; font-weight:700; color:#1a1a1a; margin:0 0 8px;">Cuentas</h3>
+                    <p style="font-size:15px; color:#666666; line-height:1.6; margin:0 0 14px;">Varias tiendas de TiendaNube en la misma base de Odoo.</p>
+                    <div style="font-size:15px; color:#444444; margin-bottom:8px;"><i class="fa fa-check" style="color:#fd4f32; margin-right:8px;"></i>Contacto del comprador opcional</div>
+                    <div style="font-size:15px; color:#444444; margin-bottom:8px;"><i class="fa fa-check" style="color:#fd4f32; margin-right:8px;"></i>Consumidor final para la factura</div>
+                    <div style="font-size:15px; color:#444444;"><i class="fa fa-check" style="color:#fd4f32; margin-right:8px;"></i>Varias tiendas por base</div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<section class="oe_container">
-    <div class="oe_row oe_spaced" style="padding: 40px 0;">
-        <h3 class="oe_slogan" style="font-size:1.5em; font-weight:700; text-align:center; margin-bottom:12px;">What gets synchronized</h3>
-        <p style="text-align:center; color:#888; margin-bottom:32px;">Everything you need to run your store — nothing you don't.</p>
-
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px;">
-
-            <div>
-                <h4 style="font-weight:700; border-bottom:2px solid #e9ecef; padding-bottom:8px; margin-bottom:16px;">📦 Products</h4>
-                <ul style="list-style:none; padding:0; margin:0; color:#555; line-height:2;">
-                    <li>✓ Export Odoo products to TiendaNube</li>
-                    <li>✓ Import existing TiendaNube publications</li>
-                    <li>✓ Product images, variants and attributes</li>
-                    <li>✓ Prices from Odoo pricelists</li>
-                    <li>✓ Auto-link publications to Odoo products by SKU</li>
-                </ul>
+<section style="background-color:#ffffff; padding:0 12px 36px;">
+    <div style="border:1px solid #f0d5cf; background-color:#ffffff; border-radius:18px; padding:32px 28px;">
+        <div style="font-size:13px; font-weight:700; color:#fd4f32; text-transform:uppercase;">Direccion del dato</div>
+        <h2 style="font-size:34px; font-weight:700; color:#111827; margin:8px 0 18px;">Que se sincroniza</h2>
+        <div class="row">
+            <div class="col-md-6" style="margin-bottom:16px;">
+                <div style="background-color:#fd4f32; color:#ffffff; border-radius:14px; padding:18px 20px; margin-bottom:12px;">
+                    <div style="font-size:18px; font-weight:700;">De Odoo a TiendaNube</div>
+                </div>
+                <div style="font-size:15px; color:#374151; line-height:1.9;">
+                    <div><i class="fa fa-circle" style="color:#fd4f32; font-size:8px; margin-right:8px;"></i>Alta de publicaciones, precios y stock</div>
+                    <div><i class="fa fa-circle" style="color:#fd4f32; font-size:8px; margin-right:8px;"></i>Imagenes, variantes y atributos</div>
+                    <div><i class="fa fa-circle" style="color:#fd4f32; font-size:8px; margin-right:8px;"></i>Pausa y reactivacion segun el stock</div>
+                </div>
             </div>
-
-            <div>
-                <h4 style="font-weight:700; border-bottom:2px solid #e9ecef; padding-bottom:8px; margin-bottom:16px;">📊 Stock</h4>
-                <ul style="list-style:none; padding:0; margin:0; color:#555; line-height:2;">
-                    <li>✓ Real-time stock sync on every inventory move</li>
-                    <li>✓ Auto-pause listings when stock hits minimum</li>
-                    <li>✓ Auto-reactivate when stock is replenished</li>
-                    <li>✓ Manual sync available at any time</li>
-                    <li>✓ Sync logs for full traceability</li>
-                </ul>
+            <div class="col-md-6" style="margin-bottom:16px;">
+                <div style="background-color:#ffffff; color:#fd4f32; border:1px solid #fd4f32; border-radius:14px; padding:18px 20px; margin-bottom:12px;">
+                    <div style="font-size:18px; font-weight:700;">De TiendaNube a Odoo</div>
+                </div>
+                <div style="font-size:15px; color:#374151; line-height:1.9;">
+                    <div><i class="fa fa-circle" style="color:#fd4f32; font-size:8px; margin-right:8px;"></i>Importacion de publicaciones y vinculo por SKU</div>
+                    <div><i class="fa fa-circle" style="color:#fd4f32; font-size:8px; margin-right:8px;"></i>Pedidos por webhook y por polling</div>
+                    <div><i class="fa fa-circle" style="color:#fd4f32; font-size:8px; margin-right:8px;"></i>Datos del comprador y del envio</div>
+                </div>
             </div>
-
-            <div>
-                <h4 style="font-weight:700; border-bottom:2px solid #e9ecef; padding-bottom:8px; margin-bottom:16px;">🛒 Orders</h4>
-                <ul style="list-style:none; padding:0; margin:0; color:#555; line-height:2;">
-                    <li>✓ Real-time order import via webhooks</li>
-                    <li>✓ Scheduled polling as fallback</li>
-                    <li>✓ Customer records created automatically</li>
-                    <li>✓ Delivery orders generated from sales</li>
-                    <li>✓ Full order history in Odoo</li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 style="font-weight:700; border-bottom:2px solid #e9ecef; padding-bottom:8px; margin-bottom:16px;">⚙️ Configuration</h4>
-                <ul style="list-style:none; padding:0; margin:0; color:#555; line-height:2;">
-                    <li>✓ Multiple TiendaNube stores per Odoo instance</li>
-                    <li>✓ Per-store webhook configuration</li>
-                    <li>✓ Configurable stock rules per publication</li>
-                    <li>✓ Fallback product for unmatched SKUs</li>
-                    <li>✓ Allowed SKU list for selective sync</li>
-                </ul>
-            </div>
-
         </div>
     </div>
 </section>
 
-<section class="oe_container oe_dark">
-    <div class="oe_row oe_spaced" style="padding: 40px 0;">
-        <h3 class="oe_slogan" style="font-size:1.5em; font-weight:700; text-align:center; margin-bottom:32px;">Data &amp; privacy</h3>
-        <p style="max-width:680px; margin:0 auto; text-align:center; color:#555; line-height:1.8;">
-            Once authorized, the connector exchanges only the data required for e-commerce operations —
-            products, variants, stock levels, orders, and the customer and shipping details provided by TiendaNube.
-            All credentials and tokens are stored exclusively in your own Odoo database.
-            <strong>No activation key. No third-party server. No lock-in.</strong>
-        </p>
+<section style="background-color:#ffffff; padding:0 12px 36px;">
+    <div style="border:1px solid #f0d5cf; background-color:#ffffff; border-radius:18px; padding:32px 28px;">
+        <div style="font-size:13px; font-weight:700; color:#fd4f32; text-transform:uppercase;">Privacidad</div>
+        <h2 style="font-size:34px; font-weight:700; color:#111827; margin:8px 0 12px;">Servicio externo y datos</h2>
+        <p style="font-size:16px; line-height:1.7; color:#374151; margin:0 0 10px;">El modulo usa la API de TiendaNube. Hace falta una tienda activa y una aplicacion de socio (Client ID, Client Secret y Store ID).</p>
+        <p style="font-size:16px; line-height:1.7; color:#374151; margin:0;">Una vez autorizado, se intercambian publicaciones, variantes, imagenes, stock, precios, pedidos y los datos de comprador y envio que envia TiendaNube. Las credenciales y los tokens viven en tu base. Sin clave de activacion y sin servidor de terceros.</p>
     </div>
 </section>
 
-<section class="oe_container">
-    <div class="oe_row oe_spaced" style="padding: 40px 0; text-align:center;">
-        <h3 class="oe_slogan" style="font-size:1.5em; font-weight:700; margin-bottom:16px;">Support</h3>
-        <p style="color:#555; line-height:1.8;">
-            Developed and maintained by <strong>Galarreta</strong><br/>
-            For questions, issues or feature requests:<br/>
-            <a href="mailto:lautaro@galarreta.co" style="color:#3b5bdb; font-weight:600;">lautaro@galarreta.co</a>
-        </p>
+<section style="background-color:#ffffff; padding:0 12px 36px;">
+    <div style="border:1px solid #f0d5cf; background-color:#ffffff; border-radius:18px; padding:32px 28px;">
+        <div style="font-size:13px; font-weight:700; color:#fd4f32; text-transform:uppercase;">Ayuda</div>
+        <h2 style="font-size:34px; font-weight:700; color:#111827; margin:8px 0 18px;">Preguntas frecuentes</h2>
+        <div style="border-left:4px solid #fd4f32; background-color:#ffffff; padding:14px 16px; margin-bottom:10px;">
+            <div style="font-weight:700; color:#111827;">Que hace falta para conectar?</div>
+            <div style="color:#475569; margin-top:4px;">Una tienda de TiendaNube y una aplicacion de socio con Client ID, Client Secret y Store ID.</div>
+        </div>
+        <div style="border-left:4px solid #fd4f32; background-color:#ffffff; padding:14px 16px; margin-bottom:10px;">
+            <div style="font-weight:700; color:#111827;">Donde se guardan los tokens?</div>
+            <div style="color:#475569; margin-top:4px;">Solo en tu base de Odoo. No hay servidor de terceros ni clave de activacion.</div>
+        </div>
+        <div style="border-left:4px solid #fd4f32; background-color:#ffffff; padding:14px 16px; margin-bottom:10px;">
+            <div style="font-weight:700; color:#111827;">Las ventas entran solas?</div>
+            <div style="color:#475569; margin-top:4px;">Si. Con el webhook activo, cada venta se procesa al instante. El polling revisa lo que falto y no duplica pedidos.</div>
+        </div>
+        <div style="border-left:4px solid #fd4f32; background-color:#ffffff; padding:14px 16px; margin-bottom:10px;">
+            <div style="font-weight:700; color:#111827;">Se factura sola?</div>
+            <div style="color:#475569; margin-top:4px;">Si lo activas. La venta puede crear el pedido, la entrega y la factura, con diario e impuesto configurables.</div>
+        </div>
+        <div style="border-left:4px solid #fd4f32; background-color:#ffffff; padding:14px 16px; margin-bottom:10px;">
+            <div style="font-weight:700; color:#111827;">Se puede usar mas de una tienda?</div>
+            <div style="color:#475569; margin-top:4px;">Si. El conector admite varias cuentas de TiendaNube en la misma base.</div>
+        </div>
+        <div style="border-left:4px solid #fd4f32; background-color:#ffffff; padding:14px 16px;">
+            <div style="font-weight:700; color:#111827;">Que pasa si el SKU no coincide?</div>
+            <div style="color:#475569; margin-top:4px;">Se puede usar un producto de respaldo para no frenar el pedido ni la factura. En el PDF queda el nombre de TiendaNube.</div>
+        </div>
+    </div>
+</section>
+
+<section style="background-color:#ffffff; padding:0 12px 28px;">
+    <div style="background-color:#fd4f32; color:#ffffff; border-radius:18px; padding:40px 28px; text-align:center;">
+        <div style="font-size:13px; font-weight:700; text-transform:uppercase;">Soporte</div>
+        <h2 style="font-size:34px; font-weight:800; color:#ffffff; margin:8px 0;">Desarrollado por Galarreta</h2>
+        <p style="font-size:16px; color:#ffffff; margin:0 0 18px;">Consultas, problemas o mejoras.</p>
+        <a href="mailto:lautaro@galarreta.co" style="display:inline-block; background-color:#ffffff; color:#fd4f32; border-radius:14px; padding:12px 24px; font-weight:700; text-decoration:none;">lautaro@galarreta.co</a>
+        <div style="margin-top:14px;"><a href="https://galarreta.co" style="color:#ffffff; font-weight:700;">galarreta.co</a></div>
     </div>
 </section>
