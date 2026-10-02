@@ -28,6 +28,8 @@ Features:
     'author': "Galarreta",
     'website': "https://galarreta.co",
     'support': "alvaro@galarreta.co",
+    'price': 250.00,
+    'currency': 'USD',
 
     'category': 'Sales',
     'version': '19.0.1.0.47',
