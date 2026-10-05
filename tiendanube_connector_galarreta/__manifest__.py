@@ -36,7 +36,7 @@ webhook, stock management, product sync, online store
     'price': 250.00,
     'currency': 'USD',
 
-    'category': 'eCommerce',
+    'category': 'Sales',
     'version': '19.0.1.0.47',
 
     'depends': ['base', 'product', 'sale', 'stock', 'mail', 'account'],
