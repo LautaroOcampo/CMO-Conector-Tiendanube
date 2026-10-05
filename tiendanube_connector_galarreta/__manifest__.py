@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Conector Tiendanube",
+    'name': "TiendaNube Connector",
 
-    'summary': "Sync products, stock and orders between Odoo and TiendaNube",
+    'summary': "Connect Odoo with TiendaNube — sync products, stock and orders in real time",
 
     'description': """
-TiendaNube Connector
-====================
+TiendaNube Connector for Odoo
+==============================
 
-Connect Odoo with the TiendaNube (Nuvemshop) API.
+Connect your Odoo instance with TiendaNube (Nuvemshop), the leading
+e-commerce platform in Latin America.
 
 Requires an active TiendaNube partner application and store
 (external service). Authorization uses OAuth 2.0; product, stock
@@ -19,10 +20,14 @@ Features:
 * Export Odoo products to TiendaNube
 * Import products from TiendaNube into Odoo
 * Sync images, variants and attributes
-* Sync stock (manual or automatic)
-* Import sales via webhook notifications and polling
-* OAuth 2.0 authentication and token management
-* Automatic pause/unpause based on minimum stock rules
+* Sync stock — manual or automatic
+* Import orders via webhook notifications and scheduled polling
+* OAuth 2.0 authentication with automatic token management
+* Automatic pause and unpause of listings based on minimum stock rules
+
+Keywords: TiendaNube, Nuvemshop, e-commerce, ecommerce, marketplace,
+Latin America, Argentina, Brazil, inventory sync, order automation,
+webhook, stock management, product sync, online store
     """,
 
     'author': "Galarreta",
@@ -31,7 +36,7 @@ Features:
     'price': 250.00,
     'currency': 'USD',
 
-    'category': 'Sales',
+    'category': 'eCommerce',
     'version': '19.0.1.0.47',
 
     'depends': ['base', 'product', 'sale', 'stock', 'mail', 'account'],
